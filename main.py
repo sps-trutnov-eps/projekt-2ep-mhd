@@ -6,6 +6,7 @@ ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
 cerna = (0,0,0)
 bila = (255,255,255)
 ruzova = (199,21,133)
+hneda = (139,69,19)
 BARVA_POZADI = cerna
 
 #rozměry pro nepřátele
@@ -29,12 +30,43 @@ zizala_y = velikost_zizaly
 #rozmery hliny
 sirka_spodni_hliny = 1920
 vyska_spodni_hliny = 50
-barva_spodni_hliny = (139,69,19)
+barva_spodni_hliny = (hneda)
 
 spodni_hlina_w = 0
 spodni_hlina_h = 1030
 spodni_hlina_x = sirka_spodni_hliny
 spodni_hlina_y = vyska_spodni_hliny
+
+
+sirka_vrchni_hliny = 1920
+vyska_vrchni_hliny = 50
+barva_vrchni_hliny = (hneda)
+
+vrchni_hlina_w = 0
+vrchni_hlina_h = 850
+vrchni_hlina_x = sirka_vrchni_hliny
+vrchni_hlina_y = vyska_vrchni_hliny
+
+
+sirka_leve_hliny = 50
+vyska_leve_hliny = 300
+barva_leve_hliny = (hneda)
+
+leva_hlina_w = 0
+leva_hlina_h = 900
+leva_hlina_x = sirka_leve_hliny
+leva_hlina_y = vyska_leve_hliny
+
+
+sirka_prave_hliny = 50
+vyska_prave_hliny = 300
+barva_prave_hliny = (hneda)
+
+prava_hlina_w = 1870
+prava_hlina_h = 900
+prava_hlina_x = sirka_prave_hliny
+prava_hlina_y = vyska_prave_hliny
+
 
 #nepratele - 1.rada
 nepritel1 = (x_nepritele,y_prvni_rady,w_nepratele,h_nepratele)
@@ -141,6 +173,9 @@ while True:
     pygame.draw.rect(okno, barva_zizaly,(zizala_w, zizala_h, zizala_x, zizala_y))
     #hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
+    pygame.draw.rect(okno, barva_vrchni_hliny,(vrchni_hlina_w, vrchni_hlina_h, vrchni_hlina_x, vrchni_hlina_y))
+    pygame.draw.rect(okno, barva_leve_hliny,(leva_hlina_w, leva_hlina_h, leva_hlina_x, leva_hlina_y))
+    pygame.draw.rect(okno, barva_prave_hliny,(prava_hlina_w, prava_hlina_h, prava_hlina_x, prava_hlina_y))
     
     
     
