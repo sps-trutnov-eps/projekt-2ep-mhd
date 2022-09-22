@@ -21,13 +21,14 @@ y_treti_rady = 300
 #rozmery zizaly
 velikost_zizaly = 50
 barva_zizaly = (ruzova)
+v_zizaly = 2
 
-zizala_w = 935
-zizala_h = 980
-zizala_x = velikost_zizaly
-zizala_y = velikost_zizaly
+zizala_w = velikost_zizaly
+zizala_h = velikost_zizaly
+zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
+zizala_y = ROZLISENI_Y - velikost_zizaly*2
 
-#rozmery hliny
+#spodni_hlina
 sirka_spodni_hliny = 1920
 vyska_spodni_hliny = 50
 barva_spodni_hliny = (hneda)
@@ -37,35 +38,19 @@ spodni_hlina_h = 1030
 spodni_hlina_x = sirka_spodni_hliny
 spodni_hlina_y = vyska_spodni_hliny
 
+#vrchni_hlina_parametry
+w_vrchni_hliny = 240
+h_vrchni_hliny = 50
 
-sirka_vrchni_hliny = 1920
-vyska_vrchni_hliny = 50
-barva_vrchni_hliny = (hneda)
+#vrchni_hlina_1
+#vrchni_hlina_2
+#vrchni_hlina_3
+#vrchni_hlina_4
+#vrchni_hlina_5
+#vrchni_hlina_6
+#vrchni_hlina_7
+#vrchni_hlina_8
 
-vrchni_hlina_w = 0
-vrchni_hlina_h = 850
-vrchni_hlina_x = sirka_vrchni_hliny
-vrchni_hlina_y = vyska_vrchni_hliny
-
-
-sirka_leve_hliny = 50
-vyska_leve_hliny = 300
-barva_leve_hliny = (hneda)
-
-leva_hlina_w = 0
-leva_hlina_h = 900
-leva_hlina_x = sirka_leve_hliny
-leva_hlina_y = vyska_leve_hliny
-
-
-sirka_prave_hliny = 50
-vyska_prave_hliny = 300
-barva_prave_hliny = (hneda)
-
-prava_hlina_w = 1870
-prava_hlina_h = 900
-prava_hlina_x = sirka_prave_hliny
-prava_hlina_y = vyska_prave_hliny
 
 
 #nepratele - 1.rada
@@ -120,21 +105,22 @@ while True:
         if u.type == pygame.MOUSEWHEEL:
             if u.y < 0:
                 pygame.display.iconify()
-        if u.type == pygame.KEYDOWN:
-            
-            if u.key == pygame.K_RIGHT:
-                zizala_w = zizala_w + 50
-            if u.key == pygame.K_LEFT:
-                zizala_w = zizala_w - 50
     
     stisknuto = pygame.key.get_pressed()
     if stisknuto[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-        
-        
-        
-        
+    #ovladani_zizaly
+    if stisknuto[pygame.K_RIGHT]:
+        zizala_x += v_zizaly
+    if stisknuto[pygame.K_LEFT]:
+        zizala_x -= v_zizaly
+    if zizala_x < 0:
+        zizala_x = 0
+    if zizala_x > ROZLISENI_X - velikost_zizaly:
+        zizala_x = ROZLISENI_X - velikost_zizaly
+    
+                
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
     pygame.draw.rect(okno, bila, nepritel1)
@@ -170,12 +156,10 @@ while True:
     pygame.draw.rect(okno, bila, nepritel29)
     pygame.draw.rect(okno, bila, nepritel30)
     #zizala
-    pygame.draw.rect(okno, barva_zizaly,(zizala_w, zizala_h, zizala_x, zizala_y))
+    pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
     #hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
-    pygame.draw.rect(okno, barva_vrchni_hliny,(vrchni_hlina_w, vrchni_hlina_h, vrchni_hlina_x, vrchni_hlina_y))
-    pygame.draw.rect(okno, barva_leve_hliny,(leva_hlina_w, leva_hlina_h, leva_hlina_x, leva_hlina_y))
-    pygame.draw.rect(okno, barva_prave_hliny,(prava_hlina_w, prava_hlina_h, prava_hlina_x, prava_hlina_y))
+
     
     
     
