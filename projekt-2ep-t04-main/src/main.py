@@ -3,13 +3,9 @@ import pygame
 import random
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
-cerna = (0,0,0)
-bila = (255,255,255)
-ruzova = (199,21,133)
-hneda = (139,69,19)
-BARVA_POZADI = cerna
+BARVA_POZADI = 255, 255, 255
 
-#rozměry pro nepřátele
+#Rozměry pro nepřátele
 w_nepratele = 50
 h_nepratele = 50
 x_nepritele = 260
@@ -18,51 +14,8 @@ y_prvni_rady = 100
 y_druhe_rady = 200
 y_treti_rady = 300
 
-#rozmery zizaly
-velikost_zizaly = 50
-barva_zizaly = (ruzova)
-v_zizaly = 1.5
-
-zizala_w = velikost_zizaly
-zizala_h = velikost_zizaly
-zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
-zizala_y = ROZLISENI_Y - velikost_zizaly*2
-
-#strela
-velikost_strely = 10
-barva_strely = (hneda)
-v_strely = 2
-
-strela_w = velikost_strely
-strela_h = velikost_strely
-strela_x = ROZLISENI_X/2 - velikost_strely/2
-strela_y = ROZLISENI_Y - velikost_strely*2
-
-
-#spodni_hlina
-sirka_spodni_hliny = 1920
-vyska_spodni_hliny = 50
-barva_spodni_hliny = (hneda)
-
-spodni_hlina_w = 0
-spodni_hlina_h = 1030
-spodni_hlina_x = sirka_spodni_hliny
-spodni_hlina_y = vyska_spodni_hliny
-
-#vrchni_hlina_parametry
-w_vrchni_hliny = 240
-h_vrchni_hliny = 50
-
-#vrchni_hlina_1
-#vrchni_hlina_2
-#vrchni_hlina_3
-#vrchni_hlina_4
-#vrchni_hlina_5
-#vrchni_hlina_6
-#vrchni_hlina_7
-#vrchni_hlina_8
-
-
+#cerna
+cerna = (0,0,0)
 
 #nepratele - 1.rada
 nepritel1 = (x_nepritele,y_prvni_rady,w_nepratele,h_nepratele)
@@ -121,70 +74,46 @@ while True:
     if stisknuto[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-    #ovladani_zizaly
-    if stisknuto[pygame.K_RIGHT]:
-        zizala_x += v_zizaly
-    if stisknuto[pygame.K_LEFT]:
-        zizala_x -= v_zizaly
-    if zizala_x < 0:
-        zizala_x = 0
-    if zizala_x > ROZLISENI_X - velikost_zizaly:
-        zizala_x = ROZLISENI_X - velikost_zizaly
-    #sledovani_strely
-    if strela_x > zizala_x:
-        strela_x = zizala_x + 35 + max(v_strely, zizala_x - strela_x)
-    elif strela_x < zizala_x:
-        strela_x = zizala_x - max(v_strely, zizala_x - strela_x)
-    if strela_y > zizala_y:
-        strela_y = zizala_y + max(v_strely, zizala_y - strela_y)
-    elif strela_y < zizala_y:
-        strela_y = zizala_y - max(v_strely, zizala_y - strela_y)
-
         
-    
-    
-    
+        
+        
+        
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
-    pygame.draw.rect(okno, bila, nepritel1)
-    pygame.draw.rect(okno, bila, nepritel2)
-    pygame.draw.rect(okno, bila, nepritel3)
-    pygame.draw.rect(okno, bila, nepritel4)
-    pygame.draw.rect(okno, bila, nepritel5)
-    pygame.draw.rect(okno, bila, nepritel6)
-    pygame.draw.rect(okno, bila, nepritel7)
-    pygame.draw.rect(okno, bila, nepritel8)
-    pygame.draw.rect(okno, bila, nepritel9)
-    pygame.draw.rect(okno, bila, nepritel10)
+    pygame.draw.rect(okno, cerna, nepritel1)
+    pygame.draw.rect(okno, cerna, nepritel2)
+    pygame.draw.rect(okno, cerna, nepritel3)
+    pygame.draw.rect(okno, cerna, nepritel4)
+    pygame.draw.rect(okno, cerna, nepritel5)
+    pygame.draw.rect(okno, cerna, nepritel6)
+    pygame.draw.rect(okno, cerna, nepritel7)
+    pygame.draw.rect(okno, cerna, nepritel8)
+    pygame.draw.rect(okno, cerna, nepritel9)
+    pygame.draw.rect(okno, cerna, nepritel10)
     #2. rada nepratel
-    pygame.draw.rect(okno, bila, nepritel11)
-    pygame.draw.rect(okno, bila, nepritel12)
-    pygame.draw.rect(okno, bila, nepritel13)
-    pygame.draw.rect(okno, bila, nepritel14)
-    pygame.draw.rect(okno, bila, nepritel15)
-    pygame.draw.rect(okno, bila, nepritel16)
-    pygame.draw.rect(okno, bila, nepritel17)
-    pygame.draw.rect(okno, bila, nepritel18)
-    pygame.draw.rect(okno, bila, nepritel19)
-    pygame.draw.rect(okno, bila, nepritel20)
+    pygame.draw.rect(okno, cerna, nepritel11)
+    pygame.draw.rect(okno, cerna, nepritel12)
+    pygame.draw.rect(okno, cerna, nepritel13)
+    pygame.draw.rect(okno, cerna, nepritel14)
+    pygame.draw.rect(okno, cerna, nepritel15)
+    pygame.draw.rect(okno, cerna, nepritel16)
+    pygame.draw.rect(okno, cerna, nepritel17)
+    pygame.draw.rect(okno, cerna, nepritel18)
+    pygame.draw.rect(okno, cerna, nepritel19)
+    pygame.draw.rect(okno, cerna, nepritel20)
     #3.rada nepratel
-    pygame.draw.rect(okno, bila, nepritel21)
-    pygame.draw.rect(okno, bila, nepritel22)
-    pygame.draw.rect(okno, bila, nepritel23)
-    pygame.draw.rect(okno, bila, nepritel24)
-    pygame.draw.rect(okno, bila, nepritel25)
-    pygame.draw.rect(okno, bila, nepritel26)
-    pygame.draw.rect(okno, bila, nepritel27)
-    pygame.draw.rect(okno, bila, nepritel28)
-    pygame.draw.rect(okno, bila, nepritel29)
-    pygame.draw.rect(okno, bila, nepritel30)
-    #zizala
-    pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
-    #hlina
-    pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
-    #strela
-    pygame.draw.rect(okno, barva_strely,(strela_x, strela_y, strela_w, strela_h))
-
+    pygame.draw.rect(okno, cerna, nepritel21)
+    pygame.draw.rect(okno, cerna, nepritel22)
+    pygame.draw.rect(okno, cerna, nepritel23)
+    pygame.draw.rect(okno, cerna, nepritel24)
+    pygame.draw.rect(okno, cerna, nepritel25)
+    pygame.draw.rect(okno, cerna, nepritel26)
+    pygame.draw.rect(okno, cerna, nepritel27)
+    pygame.draw.rect(okno, cerna, nepritel28)
+    pygame.draw.rect(okno, cerna, nepritel29)
+    pygame.draw.rect(okno, cerna, nepritel30)
+    
+    
     
     
     pygame.display.update()

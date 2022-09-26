@@ -28,15 +28,6 @@ zizala_h = velikost_zizaly
 zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
 zizala_y = ROZLISENI_Y - velikost_zizaly*2
 
-#strela
-velikost_strely = 10
-barva_strely = (hneda)
-v_strely = 2
-
-strela_w = velikost_strely
-strela_h = velikost_strely
-strela_x = ROZLISENI_X/2 - velikost_strely/2
-strela_y = ROZLISENI_Y - velikost_strely*2
 
 
 #spodni_hlina
@@ -130,20 +121,8 @@ while True:
         zizala_x = 0
     if zizala_x > ROZLISENI_X - velikost_zizaly:
         zizala_x = ROZLISENI_X - velikost_zizaly
-    #sledovani_strely
-    if strela_x > zizala_x:
-        strela_x = zizala_x + 35 + max(v_strely, zizala_x - strela_x)
-    elif strela_x < zizala_x:
-        strela_x = zizala_x - max(v_strely, zizala_x - strela_x)
-    if strela_y > zizala_y:
-        strela_y = zizala_y + max(v_strely, zizala_y - strela_y)
-    elif strela_y < zizala_y:
-        strela_y = zizala_y - max(v_strely, zizala_y - strela_y)
-
-        
     
-    
-    
+                
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
     pygame.draw.rect(okno, bila, nepritel1)
@@ -182,9 +161,9 @@ while True:
     pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
     #hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
-    #strela
-    pygame.draw.rect(okno, barva_strely,(strela_x, strela_y, strela_w, strela_h))
 
+    
+    
     
     
     pygame.display.update()
