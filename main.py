@@ -139,11 +139,11 @@ while True:
         strela_y = zizala_y + max(v_strely, zizala_y - strela_y)
     elif strela_y < zizala_y:
         strela_y = zizala_y - max(v_strely, zizala_y - strela_y)
+    #strelba
+    if stisknuto[pygame.K_SPACE]:
+        strela_y -= v_strely
 
-        
-    
-    
-    
+
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
     pygame.draw.rect(okno, bila, nepritel1)
