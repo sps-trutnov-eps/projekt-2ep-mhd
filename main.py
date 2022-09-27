@@ -3,6 +3,8 @@ import pygame
 import random
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
+
+#barvy
 cerna = (0,0,0)
 bila = (255,255,255)
 ruzova = (199,21,133)
@@ -31,13 +33,14 @@ zizala_y = ROZLISENI_Y - velikost_zizaly*2
 #strela
 velikost_strely = 10
 barva_strely = (hneda)
-v_strely = 2
+v_strely = 0.5
 
 strela_w = velikost_strely
 strela_h = velikost_strely
-strela_x = ROZLISENI_X/2 - velikost_strely/2
-strela_y = ROZLISENI_Y - velikost_strely*2
-
+strela_x = zizala_x + zizala_w - strela_w
+strela_y = zizala_y
+strelba = False
+sledovani = True
 
 #spodni_hlina
 sirka_spodni_hliny = 1920
@@ -131,18 +134,18 @@ while True:
     if zizala_x > ROZLISENI_X - velikost_zizaly:
         zizala_x = ROZLISENI_X - velikost_zizaly
     #sledovani_strely
-    if strela_x > zizala_x:
-        strela_x = zizala_x + 35 + max(v_strely, zizala_x - strela_x)
-    elif strela_x < zizala_x:
-        strela_x = zizala_x - max(v_strely, zizala_x - strela_x)
-    if strela_y > zizala_y:
-        strela_y = zizala_y + max(v_strely, zizala_y - strela_y)
-    elif strela_y < zizala_y:
-        strela_y = zizala_y - max(v_strely, zizala_y - strela_y)
+    if sledovani == True:
+        if strela_x > zizala_x: 
+            strela_x = zizala_x + zizala_w - strela_w  
+        if strela_x < zizala_x: 
+            strela_x = zizala_x + zizala_w - strela_w  
     #strelba
-    if stisknuto[pygame.K_SPACE]:
-        strela_y -= v_strely
+    if stisknuto[pygame.K_SPACE] and not strelba:
+        strelba = True
 
+    if strelba == True:
+        strela_y -= v_strely
+        sledovani = False       
 
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
@@ -183,7 +186,8 @@ while True:
     #hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
     #strela
-    pygame.draw.rect(okno, barva_strely,(strela_x, strela_y, strela_w, strela_h))
+    if strelba == True:
+        pygame.draw.rect(okno, barva_strely,(strela_x, strela_y, strela_w, strela_h))
 
     
     
