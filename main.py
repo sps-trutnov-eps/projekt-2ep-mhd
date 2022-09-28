@@ -20,6 +20,7 @@ y_prvni_rady = 100
 y_druhe_rady = 200
 y_treti_rady = 300
 
+
 #rozmery zizaly
 velikost_zizaly = 50
 barva_zizaly = (ruzova)
@@ -44,7 +45,7 @@ sledovani = True
 
 #spodni_hlina
 sirka_spodni_hliny = 1920
-vyska_spodni_hliny = 50
+vyska_spodni_hliny = 25
 barva_spodni_hliny = (hneda)
 
 spodni_hlina_w = 0
@@ -55,53 +56,53 @@ spodni_hlina_y = vyska_spodni_hliny
 #vrchni_hlina_parametry
 w_vrchni_hliny = 240
 h_vrchni_hliny = 50
+x_vrchni_hliny = 0
+y_vrchni_hliny = zizala_y - zizala_h - 25
 
-#vrchni_hlina_1
-#vrchni_hlina_2
-#vrchni_hlina_3
-#vrchni_hlina_4
-#vrchni_hlina_5
-#vrchni_hlina_6
-#vrchni_hlina_7
-#vrchni_hlina_8
-
-
-
+hlina1 = pygame.Rect(x_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina2 = pygame.Rect(x_vrchni_hliny + w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina3 = pygame.Rect(x_vrchni_hliny + 2*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina4 = pygame.Rect(x_vrchni_hliny + 3*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina5 = pygame.Rect(x_vrchni_hliny + 4*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina6 = pygame.Rect(x_vrchni_hliny + 5*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina7 = pygame.Rect(x_vrchni_hliny + 6*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+hlina8 = pygame.Rect(x_vrchni_hliny + 7*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
+ 
 #nepratele - 1.rada
-nepritel1 = (x_nepritele,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel2 = (x_nepritele + w_nepratele +   mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel3 = (x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel4 = (x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel5 = (x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel6 = (x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel7 = (x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel8 = (x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel9 = (x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
-nepritel10 = (x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel1 = pygame.Rect(x_nepritele,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel2 = pygame.Rect(x_nepritele + w_nepratele +   mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel3 = pygame.Rect(x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel4 = pygame.Rect(x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel5 = pygame.Rect(x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel6 = pygame.Rect(x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel7 = pygame.Rect(x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel8 = pygame.Rect(x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel9 = pygame.Rect(x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
+nepritel10 = pygame.Rect(x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_prvni_rady,w_nepratele,h_nepratele)
 
 #nepratele - 2.rada
-nepritel11 = (x_nepritele,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel12 = (x_nepritele + w_nepratele + mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel13 = (x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel14 = (x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel15 = (x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel16 = (x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel17 = (x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel18 = (x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel19 = (x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
-nepritel20 = (x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel11 = pygame.Rect(x_nepritele,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel12 = pygame.Rect(x_nepritele + w_nepratele + mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel13 = pygame.Rect(x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel14 = pygame.Rect(x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel15 = pygame.Rect(x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel16 = pygame.Rect(x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel17 = pygame.Rect(x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel18 = pygame.Rect(x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel19 = pygame.Rect(x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
+nepritel20 = pygame.Rect(x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_druhe_rady,w_nepratele,h_nepratele)
 
 #nepratele - 3.rada
-nepritel21 = (x_nepritele,y_treti_rady,w_nepratele,h_nepratele)
-nepritel22 = (x_nepritele + w_nepratele + mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel23 = (x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel24 = (x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel25 = (x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel26 = (x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel27 = (x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel28 = (x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel29 = (x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
-nepritel30 = (x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel21 = pygame.Rect(x_nepritele,y_treti_rady,w_nepratele,h_nepratele)
+nepritel22 = pygame.Rect(x_nepritele + w_nepratele + mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel23 = pygame.Rect(x_nepritele + 2*w_nepratele + 2*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel24 = pygame.Rect(x_nepritele + 3*w_nepratele + 3*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel25 = pygame.Rect(x_nepritele + 4*w_nepratele + 4*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel26 = pygame.Rect(x_nepritele + 5*w_nepratele + 5*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel27 = pygame.Rect(x_nepritele + 6*w_nepratele + 6*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel28 = pygame.Rect(x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel29 = pygame.Rect(x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
+nepritel30 = pygame.Rect(x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
 
 
 
@@ -145,7 +146,9 @@ while True:
 
     if strelba == True:
         strela_y -= v_strely
-        sledovani = False       
+        sledovani = False
+    #pohyb nepratel
+    
 
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
@@ -187,7 +190,16 @@ while True:
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
     #strela
     if strelba == True:
-        pygame.draw.rect(okno, barva_strely,(strela_x, strela_y, strela_w, strela_h))
+        pygame.draw.rect(okno, (0,255,0),(strela_x, strela_y, strela_w, strela_h))
+    #vrchni hlina
+    pygame.draw.rect(okno, hneda, hlina1)
+    pygame.draw.rect(okno, hneda, hlina2)
+    pygame.draw.rect(okno, hneda, hlina3)
+    pygame.draw.rect(okno, hneda, hlina4)
+    pygame.draw.rect(okno, hneda, hlina5)
+    pygame.draw.rect(okno, hneda, hlina6)
+    pygame.draw.rect(okno, hneda, hlina7)
+    pygame.draw.rect(okno, hneda, hlina8)
 
     
     
