@@ -9,6 +9,7 @@ cerna = (0,0,0)
 bila = (255,255,255)
 ruzova = (199,21,133)
 hneda = (139,69,19)
+seda = (128,128,128)
 BARVA_POZADI = cerna
 
 #rozměry pro nepřátele
@@ -42,6 +43,34 @@ strela_x = zizala_x + zizala_w - strela_w
 strela_y = zizala_y
 strelba = False
 sledovani = True
+
+#domy
+velikost_domu1 = 100
+barva_domu1 = (seda)
+
+dum1_w = velikost_domu1
+dum1_h = velikost_domu1
+dum1_x = 150
+dum1_y = 805
+
+
+velikost_domu2 = 100
+barva_domu2 = (seda)
+
+dum2_w = velikost_domu2
+dum2_h = velikost_domu2
+dum2_x = ROZLISENI_X/2 - velikost_domu2/2
+dum2_y = 805
+
+
+velikost_domu3 = 100
+barva_domu3 = (seda)
+
+dum3_w = velikost_domu3
+dum3_h = velikost_domu3
+dum3_x = 1670
+dum3_y = 805
+
 
 #spodni_hlina
 sirka_spodni_hliny = 1920
@@ -104,6 +133,8 @@ nepritel28 = pygame.Rect(x_nepritele + 7*w_nepratele + 7*mezera_mezi_neprateli,y
 nepritel29 = pygame.Rect(x_nepritele + 8*w_nepratele + 8*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
 nepritel30 = pygame.Rect(x_nepritele + 9*w_nepratele + 9*mezera_mezi_neprateli,y_treti_rady,w_nepratele,h_nepratele)
 
+#rychlost_nepratel
+v_nepritele = 50
 
 
 pygame.init()
@@ -139,7 +170,7 @@ while True:
         if strela_x > zizala_x: 
             strela_x = zizala_x + zizala_w - strela_w  
         if strela_x < zizala_x: 
-            strela_x = zizala_x + zizala_w - strela_w  
+            strela_x = zizala_x + zizala_w - strela_w
     #strelba
     if stisknuto[pygame.K_SPACE] and not strelba:
         strelba = True
@@ -147,8 +178,17 @@ while True:
     if strelba == True:
         strela_y -= v_strely
         sledovani = False
-    #pohyb nepratel
     
+    #kontinualni_strelba
+    if stisknuto[pygame.K_SPACE] and strela_y <= 0:
+        strela_y = zizala_y
+        strela_x = zizala_x + zizala_w - strela_w
+        
+    
+    
+    #pohyb_nepratel
+
+
 
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
@@ -186,11 +226,15 @@ while True:
     pygame.draw.rect(okno, bila, nepritel30)
     #zizala
     pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
-    #hlina
-    pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
     #strela
     if strelba == True:
         pygame.draw.rect(okno, (0,255,0),(strela_x, strela_y, strela_w, strela_h))
+    #hlina
+    pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
+    #domy
+    pygame.draw.rect(okno, barva_domu1,(dum1_x, dum1_y, dum1_w, dum1_h))
+    pygame.draw.rect(okno, barva_domu2,(dum2_x, dum2_y, dum2_w, dum2_h))
+    pygame.draw.rect(okno, barva_domu3,(dum3_x, dum3_y, dum3_w, dum3_h))
     #vrchni hlina
     pygame.draw.rect(okno, hneda, hlina1)
     pygame.draw.rect(okno, hneda, hlina2)
