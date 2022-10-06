@@ -35,7 +35,7 @@ zizala_y = ROZLISENI_Y - velikost_zizaly*2
 #strela
 velikost_strely = 10
 barva_strely = (hneda)
-v_strely = 0.2
+v_strely = 3
 
 strela_w = velikost_strely
 strela_h = velikost_strely
@@ -43,13 +43,6 @@ strela_x = zizala_x + zizala_w - strela_w
 strela_y = zizala_y
 strelba = False
 sledovani = True
-strela2_w = velikost_strely
-strela2_x = zizala_x + zizala_w - strela2_w
-strela2_y = zizala_y
-strela2_h = velikost_strely
-strela2 = pygame.Rect(strela2_x,strela2_y,strela2_w,strela2_h)
-strelba2 = False
-sledovani2 = True
 
 
 #domy
@@ -173,11 +166,7 @@ while True:
             strela_x = zizala_x + zizala_w - strela_w  
         if strela_x < zizala_x:
             strela_x = zizala_x + zizala_w - strela_w
-    if sledovani2 == True:            
-        if strela2_x > zizala_x: 
-            strela2_x = zizala_x + zizala_w - strela2_w  
-        if strela2_x < zizala_x: 
-            strela2_x = zizala_x + zizala_w - strela2_w
+            
     #strelba
     if stisknuto[pygame.K_SPACE] and not strelba:
         strelba = True
@@ -186,12 +175,6 @@ while True:
         strela_y -= v_strely
         sledovani = False
         
-    if stisknuto[pygame.K_SPACE] and not strelba2 and strela_y < y_treti_rady + h_nepratele:
-        strelba2 = True
-        
-    if strelba2 == True:
-        strela2_y -= v_strely
-        sledovani2 = False
     
     #kontinualni_strelba
     if strela_y < 0:
@@ -199,11 +182,6 @@ while True:
     if strelba == False:
         strela_y = zizala_y
         strela_x = zizala_x + zizala_w - strela_w
-    if strela2_y < 0:
-        strelba2 = False
-    if strelba2 == False:
-        strela2_y = zizala_y
-        strela2_x = zizala_x + zizala_w - strela2_w
     
     
     #pohyb_nepratel
@@ -237,8 +215,6 @@ while True:
     #strela
     if strelba == True:
         pygame.draw.rect(okno, (0,255,0), (strela_x,strela_y,strela_w,strela_h))
-    if strelba2 == True and strela_y < y_treti_rady + h_nepratele:
-        pygame.draw.rect(okno, (0,255,0), (strela2_x,strela2_y,strela2_w,strela2_h))
         
     #hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
