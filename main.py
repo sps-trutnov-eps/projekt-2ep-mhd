@@ -12,6 +12,7 @@ hneda = (139,69,19)
 seda = (128,128,128)
 BARVA_POZADI = cerna
 
+
 #rozměry pro nepřátele
 class nepritel():
     def __init__(self,x,y):
@@ -35,7 +36,7 @@ zizala_y = ROZLISENI_Y - velikost_zizaly*2
 #strela
 velikost_strely = 10
 barva_strely = (hneda)
-v_strely = 3
+v_strely = 2
 
 strela_w = velikost_strely
 strela_h = velikost_strely
@@ -104,7 +105,6 @@ for i in range(11):
     n = nepritel((310 + 125*i),100)
     rada1.append(n)
 
-
 #nepratele - 2.rada
 rada2 = []
 for i in range(11):
@@ -160,6 +160,7 @@ while True:
         zizala_x = 0
     if zizala_x > ROZLISENI_X - velikost_zizaly:
         zizala_x = ROZLISENI_X - velikost_zizaly
+
     #sledovani_strely
     if sledovani == True:
         if strela_x > zizala_x: 
@@ -174,7 +175,7 @@ while True:
     if strelba == True:
         strela_y -= v_strely
         sledovani = False
-        
+    
     
     #kontinualni_strelba
     if strela_y < 0:
@@ -188,7 +189,18 @@ while True:
     if stisknuto[pygame.K_p]:
         for i in rada1:
             i.pozice[0] += i.v
-
+        for i in rada2:
+            i.pozice[0] += i.v
+        for i in rada3:
+            i.pozice[0] += i.v
+        for i in rada4:
+            i.pozice[0] += i.v
+        for i in rada5:
+            i.pozice[0] += i.v
+            
+        for i in rada1:
+            if i.pozice[0] > 1920:
+                print("1")
 
 
     okno.fill(BARVA_POZADI)
@@ -216,13 +228,13 @@ while True:
     if strelba == True:
         pygame.draw.rect(okno, (0,255,0), (strela_x,strela_y,strela_w,strela_h))
         
-    #hlina
+    #spodni_hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
     #domy
     pygame.draw.rect(okno, barva_domu1,(dum1_x, dum1_y, dum1_w, dum1_h))
     pygame.draw.rect(okno, barva_domu2,(dum2_x, dum2_y, dum2_w, dum2_h))
     pygame.draw.rect(okno, barva_domu3,(dum3_x, dum3_y, dum3_w, dum3_h))
-    #vrchni hlina
+    #vrchni_hlina
     pygame.draw.rect(okno, hneda, hlina1)
     pygame.draw.rect(okno, hneda, hlina2)
     pygame.draw.rect(okno, hneda, hlina3)
