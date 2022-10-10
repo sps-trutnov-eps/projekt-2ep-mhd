@@ -20,7 +20,7 @@ class nepritel():
         self.x = x
         self.y = y
         self.pozice = [self.x,self.y]
-        self.v = 5
+        self.v = 10
                 
 
 #rozmery zizaly
@@ -44,6 +44,9 @@ strela_x = zizala_x + zizala_w - strela_w
 strela_y = zizala_y
 strelba = False
 sledovani = True
+
+#pohyb nepratel
+pohyb_nepratel = True
 
 
 #domy
@@ -102,7 +105,7 @@ hlina8 = pygame.Rect(x_vrchni_hliny + 7*w_vrchni_hliny, y_vrchni_hliny, w_vrchni
 #nepratele - 1.rada
 rada1 = []
 for i in range(11):
-    n = nepritel((310 + 125*i),100)
+    n = nepritel((310 + 125 * i),100)
     rada1.append(n)
 
 #nepratele - 2.rada
@@ -188,7 +191,14 @@ while True:
     #pohyb_nepratel
     if stisknuto[pygame.K_p]:
         for i in rada1:
-            i.pozice[0] += i.v
+            if pohyb_nepratel == True:
+                i.pozice[0] += i.v
+            if i.pozice[0] + i.rozmer[0] > ROZLISENI_X:
+                pohyb_nepratel = False
+            if pohyb_nepratel == False:
+                i.pozice[0] -= i.v
+            if i.pozice[0] < 0:
+                pohyb_nepratel = True
         for i in rada2:
             i.pozice[0] += i.v
         for i in rada3:
@@ -197,11 +207,9 @@ while True:
             i.pozice[0] += i.v
         for i in rada5:
             i.pozice[0] += i.v
+        
             
-        for i in rada1:
-            if i.pozice[0] > 1920:
-                print("1")
-
+            
 
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
