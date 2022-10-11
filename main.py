@@ -3,6 +3,7 @@ import pygame
 import random
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
+cas = pygame.time.Clock()
 
 #barvy
 cerna = (0,0,0)
@@ -20,7 +21,7 @@ class nepritel():
         self.x = x
         self.y = y
         self.pozice = [self.x,self.y]
-        self.v = 10
+        self.v = 3
                 
 
 #rozmery zizaly
@@ -46,7 +47,11 @@ strelba = False
 sledovani = True
 
 #pohyb nepratel
-pohyb_nepratel = True
+pohyb_nepratel1 = True
+pohyb_nepratel2 = True
+pohyb_nepratel3 = True
+pohyb_nepratel4 = True
+pohyb_nepratel5 = True
 
 
 #domy
@@ -105,7 +110,7 @@ hlina8 = pygame.Rect(x_vrchni_hliny + 7*w_vrchni_hliny, y_vrchni_hliny, w_vrchni
 #nepratele - 1.rada
 rada1 = []
 for i in range(11):
-    n = nepritel((310 + 125 * i),100)
+    n = nepritel(310 + 125*i,100)
     rada1.append(n)
 
 #nepratele - 2.rada
@@ -189,24 +194,57 @@ while True:
     
     
     #pohyb_nepratel
-    if stisknuto[pygame.K_p]:
-        for i in rada1:
-            if pohyb_nepratel == True:
+
+        for i in rada1:            
+            if pohyb_nepratel1 == True:
                 i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] > ROZLISENI_X:
-                pohyb_nepratel = False
-            if pohyb_nepratel == False:
+            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+                pohyb_nepratel1 = False
+            if pohyb_nepratel1 == False:
                 i.pozice[0] -= i.v
-            if i.pozice[0] < 0:
-                pohyb_nepratel = True
+            if i.pozice[0] <= 0:
+                pohyb_nepratel1 = True
+
         for i in rada2:
-            i.pozice[0] += i.v
+            if pohyb_nepratel2 == True:
+                i.pozice[0] += i.v
+            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+                pohyb_nepratel2 = False
+            if pohyb_nepratel2 == False:
+                i.pozice[0] -= i.v
+            if i.pozice[0] <= 0:
+                pohyb_nepratel2 = True
+
         for i in rada3:
-            i.pozice[0] += i.v
+            if pohyb_nepratel3 == True:
+                i.pozice[0] += i.v
+            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+                pohyb_nepratel3 = False
+            if pohyb_nepratel3 == False:
+                i.pozice[0] -= i.v
+            if i.pozice[0] <= 0:
+                pohyb_nepratel3 = True
+
         for i in rada4:
-            i.pozice[0] += i.v
+            if pohyb_nepratel4 == True:
+                i.pozice[0] += i.v
+            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+                pohyb_nepratel4 = False
+            if pohyb_nepratel4 == False:
+                i.pozice[0] -= i.v
+            if i.pozice[0] <= 0:
+                pohyb_nepratel4 = True
+
         for i in rada5:
-            i.pozice[0] += i.v
+            if pohyb_nepratel5 == True:
+                i.pozice[0] += i.v
+            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+                pohyb_nepratel5 = False
+            if pohyb_nepratel5 == False:
+                i.pozice[0] -= i.v
+            if i.pozice[0] <= 0:
+                pohyb_nepratel5 = True
+
         
             
             
@@ -255,3 +293,4 @@ while True:
     
     
     pygame.display.update()
+    
