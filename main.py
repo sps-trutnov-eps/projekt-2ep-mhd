@@ -21,7 +21,14 @@ class nepritel():
         self.x = x
         self.y = y
         self.pozice = [self.x,self.y]
-        self.v = 3
+        self.v = 1.5
+        
+#pohyb nepratel
+pohyb_nepratel1 = True
+pohyb_nepratel2 = True
+pohyb_nepratel3 = True
+pohyb_nepratel4 = True
+pohyb_nepratel5 = True
                 
 
 #rozmery zizaly
@@ -45,14 +52,6 @@ strela_x = zizala_x + zizala_w - strela_w
 strela_y = zizala_y
 strelba = False
 sledovani = True
-
-#pohyb nepratel
-pohyb_nepratel1 = True
-pohyb_nepratel2 = True
-pohyb_nepratel3 = True
-pohyb_nepratel4 = True
-pohyb_nepratel5 = True
-
 
 #domy
 velikost_domu1 = 100
@@ -159,6 +158,7 @@ while True:
     if stisknuto[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
+        
     #ovladani_zizaly
     if stisknuto[pygame.K_RIGHT]:
         zizala_x += v_zizaly
@@ -177,7 +177,7 @@ while True:
             strela_x = zizala_x + zizala_w - strela_w
             
     #strelba
-    if stisknuto[pygame.K_SPACE] and not strelba:
+    if stisknuto[pygame.K_SPACE]:
         strelba = True
 
     if strelba == True:
@@ -195,55 +195,60 @@ while True:
     
     #pohyb_nepratel
 
-        for i in rada1:            
-            if pohyb_nepratel1 == True:
-                i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
-                pohyb_nepratel1 = False
-            if pohyb_nepratel1 == False:
-                i.pozice[0] -= i.v
-            if i.pozice[0] <= 0:
-                pohyb_nepratel1 = True
+    for i in rada1:
+        if pohyb_nepratel1:
+            i.pozice[0] += i.v
+        else:
+            i.pozice[0] -= i.v
+    for i in rada1:
+        if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+            pohyb_nepratel1 = False        
+        elif i.pozice[0] <= 0:
+            pohyb_nepratel1 = True
 
-        for i in rada2:
-            if pohyb_nepratel2 == True:
-                i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
-                pohyb_nepratel2 = False
-            if pohyb_nepratel2 == False:
-                i.pozice[0] -= i.v
-            if i.pozice[0] <= 0:
-                pohyb_nepratel2 = True
+    for i in rada2:
+        if pohyb_nepratel2:
+            i.pozice[0] += i.v
+        else:
+            i.pozice[0] -= i.v
+    for i in rada2:
+        if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+            pohyb_nepratel2 = False        
+        elif i.pozice[0] <= 0:
+            pohyb_nepratel2 = True
 
-        for i in rada3:
-            if pohyb_nepratel3 == True:
-                i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
-                pohyb_nepratel3 = False
-            if pohyb_nepratel3 == False:
-                i.pozice[0] -= i.v
-            if i.pozice[0] <= 0:
-                pohyb_nepratel3 = True
+    for i in rada3:
+        if pohyb_nepratel3:
+            i.pozice[0] += i.v
+        else:
+            i.pozice[0] -= i.v
+    for i in rada3:
+        if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+            pohyb_nepratel3 = False        
+        elif i.pozice[0] <= 0:
+            pohyb_nepratel3 = True
 
-        for i in rada4:
-            if pohyb_nepratel4 == True:
-                i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
-                pohyb_nepratel4 = False
-            if pohyb_nepratel4 == False:
-                i.pozice[0] -= i.v
-            if i.pozice[0] <= 0:
-                pohyb_nepratel4 = True
+    for i in rada4:
+        if pohyb_nepratel4:
+            i.pozice[0] += i.v
+        else:
+            i.pozice[0] -= i.v
+    for i in rada4:
+        if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+            pohyb_nepratel4 = False        
+        elif i.pozice[0] <= 0:
+            pohyb_nepratel4 = True
 
-        for i in rada5:
-            if pohyb_nepratel5 == True:
-                i.pozice[0] += i.v
-            if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
-                pohyb_nepratel5 = False
-            if pohyb_nepratel5 == False:
-                i.pozice[0] -= i.v
-            if i.pozice[0] <= 0:
-                pohyb_nepratel5 = True
+    for i in rada5:
+        if pohyb_nepratel5:
+            i.pozice[0] += i.v
+        else:
+            i.pozice[0] -= i.v
+    for i in rada5:
+        if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
+            pohyb_nepratel5 = False        
+        elif i.pozice[0] <= 0:
+            pohyb_nepratel5 = True
 
         
             
