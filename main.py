@@ -30,6 +30,15 @@ pohyb_nepratel3 = True
 pohyb_nepratel4 = True
 pohyb_nepratel5 = True
                 
+                
+                
+zije1 = True
+zije2 = True
+zije3 = True
+zije4 = True
+zije5 = True 
+                
+
 
 #rozmery zizaly
 velikost_zizaly = 50
@@ -249,29 +258,53 @@ while True:
             pohyb_nepratel5 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel5 = True
-
-        
             
+            
+            
+    for i in rada1:
+        if i.pozice[1] == strela_y and strela_x:
+            zije1 = False
+            
+    for i in rada2:
+        if i.pozice[1] == strela_y and strela_x:
+            zije2 = False
+            
+    for i in rada3:
+        if i.pozice[1] == strela_y and strela_x:
+            zije3 = False
+            
+    for i in rada4:
+        if i.pozice[1] == strela_y and strela_x:
+            zije4 = False
+            
+    for i in rada5:
+        if i.pozice[1] == strela_y and strela_x:
+            zije5 = False
             
 
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
-    for i in rada1:
-        pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+    if zije1 == True:
+        for i in rada1:
+            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     #2. rada nepratel
-    for i in rada2:
-        pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+    if zije2 == True:
+        for i in rada2:
+            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
     #3.rada nepratel
-    for i in rada3:
-        pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+    if zije3 == True:
+        for i in rada3:
+            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     
     #4. rada neprartel
-    for i in rada4:
-        pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+    if zije4 == True:
+        for i in rada4:
+            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     #5. rada nepratel
-    for i in rada5:
-        pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+    if zije5 == True:
+        for i in rada5:
+            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
     #zizala
     pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
