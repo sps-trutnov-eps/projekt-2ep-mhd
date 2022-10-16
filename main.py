@@ -31,14 +31,21 @@ pohyb_nepratel4 = True
 pohyb_nepratel5 = True
                 
                 
-                
+#kolize_strely_s_neprateli 
 zije1 = True
 zije2 = True
 zije3 = True
 zije4 = True
-zije5 = True 
-                
+zije5 = True
 
+#rozměry pro nepřátele
+class nepritel():
+    def __init__(self,x,y):
+        self.rozmer = [50,50]
+        self.x = x
+        self.y = y
+        self.pozice = [self.x,self.y]
+        self.v = 1.5
 
 #rozmery zizaly
 velikost_zizaly = 50
@@ -49,6 +56,8 @@ zizala_w = velikost_zizaly
 zizala_h = velikost_zizaly
 zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
 zizala_y = ROZLISENI_Y - velikost_zizaly*2
+
+zizala_zije = True
 
 #strela
 velikost_strely = 10
@@ -144,8 +153,6 @@ rada5 = []
 for i in range(11):
     n = nepritel((310 + 125*i),500)
     rada5.append(n)
-
-
 
 
 pygame.init()
@@ -260,26 +267,32 @@ while True:
             pohyb_nepratel5 = True
             
             
-            
+    #kolize_strely_s_neprately(NON FUNCTIONAL)
     for i in rada1:
-        if i.pozice[1] == strela_y and strela_x:
+        if i.pozice[1] == strela_y:
             zije1 = False
+            strelba = False
             
     for i in rada2:
         if i.pozice[1] == strela_y and strela_x:
             zije2 = False
+            strelba = False
             
     for i in rada3:
         if i.pozice[1] == strela_y and strela_x:
             zije3 = False
-            
+            strelba = False
+           
     for i in rada4:
         if i.pozice[1] == strela_y and strela_x:
             zije4 = False
+            strelba = False
             
     for i in rada5:
         if i.pozice[1] == strela_y and strela_x:
             zije5 = False
+            strelba = False
+    
             
 
     okno.fill(BARVA_POZADI)
@@ -307,7 +320,8 @@ while True:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
     #zizala
-    pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
+    if zizala_zije == True:
+        pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
     #strela
     if strelba == True:
         pygame.draw.rect(okno, (0,255,0), (strela_x,strela_y,strela_w,strela_h))
