@@ -11,6 +11,7 @@ bila = (255,255,255)
 ruzova = (199,21,133)
 hneda = (139,69,19)
 seda = (128,128,128)
+zelena = (0,255,0)
 BARVA_POZADI = cerna
 
 
@@ -153,6 +154,23 @@ rada5 = []
 for i in range(11):
     n = nepritel((310 + 125*i),500)
     rada5.append(n)
+    
+vsechny_rady = []
+vsechny_rady.append(rada1)
+vsechny_rady.append(rada2)
+vsechny_rady.append(rada3)
+vsechny_rady.append(rada4)
+vsechny_rady.append(rada5)
+
+#nepratelska strela
+nepratelska_strela_w = 10
+nepratelska_strela_h = 10
+random_rada = random.choice(vsechny_rady)
+random_vojak_v_rade = random.choice(random_rada)
+nepratelska_strela = pygame.Rect(random_vojak_v_rade.x, random_vojak_v_rade.y, nepratelska_strela_w, nepratelska_strela_h)
+
+
+
 
 
 pygame.init()
@@ -293,8 +311,9 @@ while True:
             zije5 = False
             strelba = False
     
-            
-
+    #pohyb_nepratelske_strely
+    random_vojak_v_rade.y += 1
+    
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
     if zije1 == True:
@@ -341,6 +360,8 @@ while True:
     pygame.draw.rect(okno, hneda, hlina6)
     pygame.draw.rect(okno, hneda, hlina7)
     pygame.draw.rect(okno, hneda, hlina8)
+    #nepratelska_strela
+    pygame.draw.rect(okno, zelena, nepratelska_strela)
 
     
     
