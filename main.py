@@ -39,15 +39,6 @@ zije3 = True
 zije4 = True
 zije5 = True
 
-#rozměry pro nepřátele
-class nepritel():
-    def __init__(self,x,y):
-        self.rozmer = [50,50]
-        self.x = x
-        self.y = y
-        self.pozice = [self.x,self.y]
-        self.v = 1.5
-
 #rozmery zizaly
 velikost_zizaly = 50
 barva_zizaly = (ruzova)
@@ -167,7 +158,10 @@ nepratelska_strela_w = 10
 nepratelska_strela_h = 10
 random_rada = random.choice(vsechny_rady)
 random_vojak_v_rade = random.choice(random_rada)
-nepratelska_strela = pygame.Rect(random_vojak_v_rade.x, random_vojak_v_rade.y, nepratelska_strela_w, nepratelska_strela_h)
+random_vojak_v_rade_x = random_vojak_v_rade.pozice[0]
+random_vojak_v_rade_y = random_vojak_v_rade.pozice[1]
+nepratelska_strela = pygame.Rect(random_vojak_v_rade_x, random_vojak_v_rade_y, nepratelska_strela_w, nepratelska_strela_h)
+
 
 
 
@@ -312,7 +306,16 @@ while True:
             strelba = False
     
     #pohyb_nepratelske_strely
-    random_vojak_v_rade.y += 1
+    nepratelska_strela.y += 1
+    if nepratelska_strela.y >= ROZLISENI_Y:
+        random_rada = random.choice(vsechny_rady)
+        random_vojak_v_rade = random.choice(random_rada)
+        nepratelska_strela.x = random_vojak_v_rade.pozice[0]
+        nepratelska_strela.y = random_vojak_v_rade.pozice[1]
+
+        
+        
+        
     
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
