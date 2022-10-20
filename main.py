@@ -23,6 +23,8 @@ class nepritel():
         self.y = y
         self.pozice = [self.x,self.y]
         self.v = 1.5
+        self.zije = True
+        self.rada_nepratel1 = pygame.Rect
         
 #pohyb nepratel
 pohyb_nepratel1 = True
@@ -60,6 +62,7 @@ strela_w = velikost_strely
 strela_h = velikost_strely
 strela_x = zizala_x + zizala_w - strela_w
 strela_y = zizala_y
+strela = pygame.Rect(strela_x, strela_y, strela_w, strela_h)
 strelba = False
 sledovani = True
 
@@ -165,8 +168,6 @@ nepratelska_strela = pygame.Rect(random_vojak_v_rade_x, random_vojak_v_rade_y, n
 
 
 
-
-
 pygame.init()
 
 pygame.display.set_caption('Mongol House Defense')
@@ -198,27 +199,27 @@ while True:
         zizala_x = ROZLISENI_X - velikost_zizaly
 
     #sledovani_strely
-    if sledovani == True:
-        if strela_x > zizala_x: 
-            strela_x = zizala_x + zizala_w - strela_w  
-        if strela_x < zizala_x:
-            strela_x = zizala_x + zizala_w - strela_w
+    if sledovani:
+        if strela.x > zizala_x: 
+            strela.x = zizala_x + zizala_w - strela.w  
+        if strela.x < zizala_x:
+            strela.x = zizala_x + zizala_w - strela.w
             
     #strelba
     if stisknuto[pygame.K_SPACE]:
         strelba = True
 
     if strelba == True:
-        strela_y -= v_strely
+        strela.y -= v_strely
         sledovani = False
     
     
     #kontinualni_strelba
-    if strela_y < 0:
+    if strela.y < 0:
         strelba = False
     if strelba == False:
-        strela_y = zizala_y
-        strela_x = zizala_x + zizala_w - strela_w
+        strela.y = zizala_y
+        strela.x = zizala_x + zizala_w - strela.w
     
     
     #pohyb_nepratel
@@ -281,28 +282,28 @@ while True:
             
     #kolize_strely_s_neprately(NON FUNCTIONAL)
     for i in rada1:
-        if i.pozice[1] == strela_y:
-            zije1 = False
+        if i.pozice[1] == strela_y and strela_x:
+            i.zije = False
             strelba = False
-            
+
     for i in rada2:
         if i.pozice[1] == strela_y and strela_x:
-            zije2 = False
+            i.zije = False
             strelba = False
             
     for i in rada3:
         if i.pozice[1] == strela_y and strela_x:
-            zije3 = False
+            i.zije = False
             strelba = False
            
     for i in rada4:
         if i.pozice[1] == strela_y and strela_x:
-            zije4 = False
+            i.zije = False
             strelba = False
             
     for i in rada5:
         if i.pozice[1] == strela_y and strela_x:
-            zije5 = False
+            i.zije = False
             strelba = False
     
     #pohyb_nepratelske_strely
@@ -312,9 +313,6 @@ while True:
         random_vojak_v_rade = random.choice(random_rada)
         nepratelska_strela.x = random_vojak_v_rade.pozice[0]
         nepratelska_strela.y = random_vojak_v_rade.pozice[1]
-
-        
-        
         
     
     okno.fill(BARVA_POZADI)
@@ -346,7 +344,7 @@ while True:
         pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
     #strela
     if strelba == True:
-        pygame.draw.rect(okno, (0,255,0), (strela_x,strela_y,strela_w,strela_h))
+        pygame.draw.rect(okno, (0,255,0), strela)
         
     #spodni_hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
