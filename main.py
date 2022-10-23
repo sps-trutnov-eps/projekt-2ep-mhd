@@ -14,10 +14,11 @@ seda = (128,128,128)
 zelena = (0,255,0)
 BARVA_POZADI = cerna
 
+objekt = pygame.Rect
 
 #rozměry pro nepřátele
-class nepritel():
-    def __init__(self,x,y):
+class nepritel(objekt):
+    def __init__(self, x, y):
         self.rozmer = [50,50]
         self.x = x
         self.y = y
@@ -25,6 +26,10 @@ class nepritel():
         self.v = 1.5
         self.zije = True
         self.rada_nepratel1 = pygame.Rect
+        self.rada_nepratel2 = pygame.Rect
+        self.rada_nepratel3 = pygame.Rect
+        self.rada_nepratel4 = pygame.Rect
+        self.rada_nepratel5 = pygame.Rect
         
 #pohyb nepratel
 pohyb_nepratel1 = True
@@ -32,14 +37,6 @@ pohyb_nepratel2 = True
 pohyb_nepratel3 = True
 pohyb_nepratel4 = True
 pohyb_nepratel5 = True
-                
-                
-#kolize_strely_s_neprateli 
-zije1 = True
-zije2 = True
-zije3 = True
-zije4 = True
-zije5 = True
 
 #rozmery zizaly
 velikost_zizaly = 50
@@ -122,7 +119,7 @@ hlina8 = pygame.Rect(x_vrchni_hliny + 7*w_vrchni_hliny, y_vrchni_hliny, w_vrchni
 #nepratele - 1.rada
 rada1 = []
 for i in range(11):
-    n = nepritel(310 + 125*i,100)
+    n = nepritel((310 + 125*i),100)
     rada1.append(n)
 
 #nepratele - 2.rada
@@ -164,8 +161,6 @@ random_vojak_v_rade = random.choice(random_rada)
 random_vojak_v_rade_x = random_vojak_v_rade.pozice[0]
 random_vojak_v_rade_y = random_vojak_v_rade.pozice[1]
 nepratelska_strela = pygame.Rect(random_vojak_v_rade_x, random_vojak_v_rade_y, nepratelska_strela_w, nepratelska_strela_h)
-
-
 
 
 pygame.init()
@@ -282,27 +277,27 @@ while True:
             
     #kolize_strely_s_neprately(NON FUNCTIONAL)
     for i in rada1:
-        if i.pozice[1] == strela_y and strela_x:
+        if pygame.Rect.colliderect(i ,strela):
             i.zije = False
             strelba = False
 
     for i in rada2:
-        if i.pozice[1] == strela_y and strela_x:
+        if pygame.Rect.colliderect(i ,strela):
             i.zije = False
             strelba = False
             
     for i in rada3:
-        if i.pozice[1] == strela_y and strela_x:
+        if pygame.Rect.colliderect(i ,strela):
             i.zije = False
             strelba = False
            
     for i in rada4:
-        if i.pozice[1] == strela_y and strela_x:
+        if pygame.Rect.colliderect(i ,strela):
             i.zije = False
             strelba = False
             
     for i in rada5:
-        if i.pozice[1] == strela_y and strela_x:
+        if pygame.Rect.colliderect(i ,strela):
             i.zije = False
             strelba = False
     
@@ -317,25 +312,25 @@ while True:
     
     okno.fill(BARVA_POZADI)
     #1. rada nepratel
-    if zije1 == True:
+    if i.zije == True:
         for i in rada1:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     #2. rada nepratel
-    if zije2 == True:
+    if i.zije == True:
         for i in rada2:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
     #3.rada nepratel
-    if zije3 == True:
+    if i.zije == True:
         for i in rada3:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     
     #4. rada neprartel
-    if zije4 == True:
+    if i.zije == True:
         for i in rada4:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
     #5. rada nepratel
-    if zije5 == True:
+    if i.zije == True:
         for i in rada5:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
