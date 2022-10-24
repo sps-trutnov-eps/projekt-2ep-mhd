@@ -74,17 +74,16 @@ spodni_hlina_x = sirka_spodni_hliny
 spodni_hlina_y = vyska_spodni_hliny
 
 #vrchni_hlina_parametry
-w_vrchni_hliny = 240
-h_vrchni_hliny = 50
-x_vrchni_hliny = 0
-y_vrchni_hliny = zizala_y - zizala_h - 25
+w_hliny = 240
+h_hliny = 50
+x_hliny = 0
+y_hliny = zizala_y - zizala_h - 25
 
-hlina1 = pygame.Rect(x_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny + 25, h_vrchni_hliny)
-hlina3 = pygame.Rect(x_vrchni_hliny + 2*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
-hlina4 = pygame.Rect(x_vrchni_hliny + 3*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
-hlina5 = pygame.Rect(x_vrchni_hliny + 4*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
-hlina6 = pygame.Rect(x_vrchni_hliny + 5*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny, h_vrchni_hliny)
-hlina8 = pygame.Rect(x_vrchni_hliny - 25 + 7*w_vrchni_hliny, y_vrchni_hliny, w_vrchni_hliny + 25, h_vrchni_hliny)
+hlina1 = pygame.Rect(0, y_hliny, w_hliny + 25, h_hliny)
+hlina3 = pygame.Rect(2*w_hliny, y_hliny, w_hliny+80, h_hliny)
+hlina4 = pygame.Rect(3*w_hliny + 80, y_hliny, w_hliny+80, h_hliny)
+hlina6 = pygame.Rect(5*w_hliny-80, y_hliny, w_hliny+80, h_hliny)
+hlina8 = pygame.Rect(0 - 25 + 7*w_hliny, y_hliny, w_hliny + 25, h_hliny)
 
 #domy
 velikost_domu = 100
@@ -97,13 +96,13 @@ dum1_y = 805
 
 dum2_w = velikost_domu
 dum2_h = velikost_domu
-dum2_x = hlina3.x + w_vrchni_hliny/2 - velikost_domu/2
+dum2_x = hlina3.x + hlina3.w - velikost_domu - 70
 dum2_y = 805
 
 
 dum3_w = velikost_domu
 dum3_h = velikost_domu
-dum3_x = hlina6.x + w_vrchni_hliny/2 - velikost_domu/2
+dum3_x = hlina6.x + 75
 dum3_y = 805
 
 
@@ -350,11 +349,10 @@ while True:
     pygame.draw.rect(okno, seda, dum2)
     pygame.draw.rect(okno, seda, dum3)
     pygame.draw.rect(okno, seda, dum4)
-    #vrchni_hlina
+    #hlina
     pygame.draw.rect(okno, hneda, hlina1)
     pygame.draw.rect(okno, hneda, hlina3)
-    pygame.draw.rect(okno, hneda, hlina4)
-    pygame.draw.rect(okno, hneda, hlina5)
+    pygame.draw.rect(okno, hneda, hlina4)    
     pygame.draw.rect(okno, hneda, hlina6)
     pygame.draw.rect(okno, hneda, hlina8)
     #nepratelska_strela
