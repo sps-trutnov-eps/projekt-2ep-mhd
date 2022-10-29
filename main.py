@@ -14,6 +14,9 @@ seda = (128,128,128)
 zelena = (0,255,0)
 BARVA_POZADI = cerna
 
+#obrazky
+zizala = pygame.image.load("zizala.gif")
+
 objekt = pygame.Rect
 
 #rozměry pro nepřátele
@@ -197,7 +200,7 @@ while True:
     #sledovani_strely
     if sledovani:
         if strela.x > zizala_x: 
-            strela.x = zizala_x + zizala_w - strela.w  
+            strela.x = zizala_x + zizala_w - strela.w
         if strela.x < zizala_x:
             strela.x = zizala_x + zizala_w - strela.w
             
@@ -316,20 +319,22 @@ while True:
     if i.zije == True:
         for i in rada1:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            
     #2. rada nepratel
     if i.zije == True:
         for i in rada2:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
 
-    #3.rada nepratel
+    #3. rada nepratel
     if i.zije == True:
         for i in rada3:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
-    
-    #4. rada neprartel
+
+    #4. rada nepratel
     if i.zije == True:
         for i in rada4:
             pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+
     #5. rada nepratel
     if i.zije == True:
         for i in rada5:
@@ -337,7 +342,8 @@ while True:
 
     #zizala
     if zizala_zije == True:
-        pygame.draw.rect(okno, barva_zizaly,(zizala_x, zizala_y, zizala_w, zizala_h))
+        okno.blit(zizala, (zizala_x,zizala_y))
+        
     #strela
     if strelba == True:
         pygame.draw.rect(okno, (0,255,0), strela)
