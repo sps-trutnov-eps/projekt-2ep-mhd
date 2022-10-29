@@ -16,6 +16,8 @@ BARVA_POZADI = cerna
 
 #obrazky
 zizala = pygame.image.load("zizala.gif")
+monke = pygame.image.load("monke.gif")
+house = pygame.image.load("mongol_house.gif")
 
 objekt = pygame.Rect
 
@@ -26,6 +28,7 @@ class nepritel(objekt):
         self.x = x
         self.y = y
         self.pozice = [self.x,self.y]
+        self.image = monke
         self.v = 1.5
         self.zije = True
         self.rada_nepratel1 = pygame.Rect
@@ -55,7 +58,7 @@ zizala_zije = True
 
 #strela
 velikost_strely = 10
-barva_strely = (hneda)
+barva_strely = (zelena)
 v_strely = 2
 
 strela_w = velikost_strely
@@ -89,30 +92,31 @@ hlina6 = pygame.Rect(5*w_hliny-80, y_hliny, w_hliny+80, h_hliny)
 hlina8 = pygame.Rect(0 - 25 + 7*w_hliny, y_hliny, w_hliny + 25, h_hliny)
 
 #domy
-velikost_domu = 100
+sirka_domu = 100
+vyska_domu = 50
 
-dum1_w = velikost_domu
-dum1_h = velikost_domu
+dum1_w = sirka_domu
+dum1_h = vyska_domu
 dum1_x = 150
-dum1_y = 805
+dum1_y = 855
 
 
-dum2_w = velikost_domu
-dum2_h = velikost_domu
-dum2_x = hlina3.x + hlina3.w - velikost_domu - 70
-dum2_y = 805
+dum2_w = sirka_domu
+dum2_h = vyska_domu
+dum2_x = hlina3.x + hlina3.w - sirka_domu - 70
+dum2_y = 855
 
 
-dum3_w = velikost_domu
-dum3_h = velikost_domu
+dum3_w = sirka_domu
+dum3_h = vyska_domu
 dum3_x = hlina6.x + 75
-dum3_y = 805
+dum3_y = 855
 
 
-dum4_w = velikost_domu
-dum4_h = velikost_domu
+dum4_w = sirka_domu
+dum4_h = vyska_domu
 dum4_x = 1670
-dum4_y = 805
+dum4_y = 855
 
 
 dum1 = pygame.Rect(dum1_x, dum1_y, dum1_w, dum1_h)
@@ -318,27 +322,27 @@ while True:
     #1. rada nepratel
     if i.zije == True:
         for i in rada1:
-            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            okno.blit(monke, (i.pozice,i.rozmer))
             
     #2. rada nepratel
     if i.zije == True:
         for i in rada2:
-            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            okno.blit(monke, (i.pozice,i.rozmer))
 
     #3. rada nepratel
     if i.zije == True:
         for i in rada3:
-            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            okno.blit(monke, (i.pozice,i.rozmer))
 
     #4. rada nepratel
     if i.zije == True:
         for i in rada4:
-            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            okno.blit(monke, (i.pozice,i.rozmer))
 
     #5. rada nepratel
     if i.zije == True:
         for i in rada5:
-            pygame.draw.rect(okno,bila,(i.pozice,i.rozmer))
+            okno.blit(monke, (i.pozice,i.rozmer))
 
     #zizala
     if zizala_zije == True:
@@ -346,15 +350,15 @@ while True:
         
     #strela
     if strelba == True:
-        pygame.draw.rect(okno, (0,255,0), strela)
+        pygame.draw.rect(okno, (0,255,0), strela) 
         
     #spodni_hlina
     pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
     #domy
-    pygame.draw.rect(okno, seda, dum1)
-    pygame.draw.rect(okno, seda, dum2)
-    pygame.draw.rect(okno, seda, dum3)
-    pygame.draw.rect(okno, seda, dum4)
+    okno.blit(house, (dum1_x, dum1_y))
+    okno.blit(house, (dum2_x, dum2_y))
+    okno.blit(house, (dum3_x, dum3_y))
+    okno.blit(house, (dum4_x, dum4_y))
     #hlina
     pygame.draw.rect(okno, hneda, hlina1)
     pygame.draw.rect(okno, hneda, hlina3)
