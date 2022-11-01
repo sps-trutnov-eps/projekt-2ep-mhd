@@ -18,6 +18,9 @@ BARVA_POZADI = cerna
 zizala = pygame.image.load("zizala.gif")
 monke = pygame.image.load("monke.gif")
 house = pygame.image.load("mongol_house.gif")
+mensi_hlina = pygame.image.load("mensi_hlina.gif")
+vetsi_hlina = pygame.image.load("vetsi_hlina.gif")
+spodni_hlina = pygame.image.load("spodni_hlina.gif")
 
 objekt = pygame.Rect
 
@@ -52,7 +55,7 @@ v_zizaly = 2
 zizala_w = velikost_zizaly
 zizala_h = velikost_zizaly
 zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
-zizala_y = ROZLISENI_Y - velikost_zizaly*2
+zizala_y = ROZLISENI_Y + 25 -velikost_zizaly*2
 
 zizala_zije = True
 
@@ -70,26 +73,32 @@ strelba = False
 sledovani = True
 
 #spodni_hlina
-sirka_spodni_hliny = 1920
-vyska_spodni_hliny = 25
-barva_spodni_hliny = (hneda)
+spodni_hlina_x = 0
+spodni_hlina_y = ROZLISENI_Y - 25
 
-spodni_hlina_w = 0
-spodni_hlina_h = 1030
-spodni_hlina_x = sirka_spodni_hliny
-spodni_hlina_y = vyska_spodni_hliny
+spodni_hlina_rect = spodni_hlina.get_rect()
+spodni_hlina_rect.topleft = (spodni_hlina_x, spodni_hlina_y)
 
 #vrchni_hlina_parametry
 w_hliny = 240
-h_hliny = 50
+h_hliny = 30
 x_hliny = 0
 y_hliny = zizala_y - zizala_h - 25
 
-hlina1 = pygame.Rect(0, y_hliny, w_hliny + 25, h_hliny)
-hlina3 = pygame.Rect(2*w_hliny, y_hliny, w_hliny+80, h_hliny)
-hlina4 = pygame.Rect(3*w_hliny + 80, y_hliny, w_hliny+80, h_hliny)
-hlina6 = pygame.Rect(5*w_hliny-80, y_hliny, w_hliny+80, h_hliny)
-hlina8 = pygame.Rect(0 - 25 + 7*w_hliny, y_hliny, w_hliny + 25, h_hliny)
+hlina1 = mensi_hlina.get_rect()
+hlina1.topleft = (0,y_hliny)
+
+hlina2 = vetsi_hlina.get_rect()
+hlina2.topleft = (2*w_hliny, y_hliny)
+
+hlina3 = vetsi_hlina.get_rect()
+hlina3.topleft = (3*w_hliny + 80, y_hliny)
+
+hlina4 = vetsi_hlina.get_rect()
+hlina4.topleft = (5*w_hliny-80, y_hliny)
+
+hlina5 = mensi_hlina.get_rect()
+hlina5.topleft = (0-25 + 7*w_hliny,y_hliny)
 
 #domy
 sirka_domu = 100
@@ -98,25 +107,25 @@ vyska_domu = 50
 dum1_w = sirka_domu
 dum1_h = vyska_domu
 dum1_x = 150
-dum1_y = 855
+dum1_y = 855 + 25
 
 
 dum2_w = sirka_domu
 dum2_h = vyska_domu
-dum2_x = hlina3.x + hlina3.w - sirka_domu - 70
-dum2_y = 855
+dum2_x = hlina2.x + hlina2.w - sirka_domu - 70
+dum2_y = 855 + 25
 
 
 dum3_w = sirka_domu
 dum3_h = vyska_domu
-dum3_x = hlina6.x + 75
-dum3_y = 855
+dum3_x = hlina4.x + 75
+dum3_y = 855 + 25
 
 
 dum4_w = sirka_domu
 dum4_h = vyska_domu
 dum4_x = 1670
-dum4_y = 855
+dum4_y = 855 + 25
 
 
 dum1 = pygame.Rect(dum1_x, dum1_y, dum1_w, dum1_h)
@@ -353,18 +362,18 @@ while True:
         pygame.draw.rect(okno, (0,255,0), strela) 
         
     #spodni_hlina
-    pygame.draw.rect(okno, barva_spodni_hliny,(spodni_hlina_w, spodni_hlina_h, spodni_hlina_x, spodni_hlina_y))
+    okno.blit(spodni_hlina, spodni_hlina_rect)
     #domy
     okno.blit(house, (dum1_x, dum1_y))
     okno.blit(house, (dum2_x, dum2_y))
     okno.blit(house, (dum3_x, dum3_y))
     okno.blit(house, (dum4_x, dum4_y))
     #hlina
-    pygame.draw.rect(okno, hneda, hlina1)
-    pygame.draw.rect(okno, hneda, hlina3)
-    pygame.draw.rect(okno, hneda, hlina4)    
-    pygame.draw.rect(okno, hneda, hlina6)
-    pygame.draw.rect(okno, hneda, hlina8)
+    okno.blit(mensi_hlina, hlina1)
+    okno.blit(vetsi_hlina, hlina2)
+    okno.blit(vetsi_hlina, hlina3)    
+    okno.blit(vetsi_hlina, hlina4)
+    okno.blit(mensi_hlina, hlina5)
     #nepratelska_strela
     pygame.draw.rect(okno, zelena, nepratelska_strela)
 
