@@ -21,6 +21,7 @@ house = pygame.image.load("mongol_house.gif")
 mensi_hlina = pygame.image.load("mensi_hlina.gif")
 vetsi_hlina = pygame.image.load("vetsi_hlina.gif")
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
+pozadi = pygame.image.load("pozadi.gif")
 
 objekt = pygame.Rect
 
@@ -186,6 +187,8 @@ pygame.display.set_caption('Mongol House Defense')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
 
 while True:
+    okno.fill(BARVA_POZADI)
+    okno.blit(pozadi,(0,0))
     udalosti = pygame.event.get()
     for u in udalosti:
         if u.type == pygame.QUIT:
@@ -327,7 +330,6 @@ while True:
         nepratelska_strela.y = random_vojak_v_rade.pozice[1]
         
     
-    okno.fill(BARVA_POZADI)
     #1. rada nepratel
     if i.zije == True:
         for i in rada1:
