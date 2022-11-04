@@ -357,7 +357,7 @@ while True:
 
     #zizala
     if zizala_zije == True:
-        okno.blit(zizala, (zizala_x,zizala_y))
+        okno.blit(zizala, (zizala_x, zizala_y))
         
     #strela
     if strelba == True:
