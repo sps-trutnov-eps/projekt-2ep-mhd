@@ -22,6 +22,8 @@ mensi_hlina = pygame.image.load("mensi_hlina.gif")
 vetsi_hlina = pygame.image.load("vetsi_hlina.gif")
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
 pozadi = pygame.image.load("pozadi.gif")
+strela_load = pygame.image.load("strela.gif")
+banan = pygame.image.load("banan.gif")
 
 objekt = pygame.Rect
 
@@ -33,7 +35,7 @@ class nepritel(objekt):
         self.y = y
         self.pozice = [self.x,self.y]
         self.image = monke
-        self.v = 1.5
+        self.v = 0.5
         self.zije = True
         self.rada_nepratel1 = pygame.Rect
         self.rada_nepratel2 = pygame.Rect
@@ -65,11 +67,10 @@ velikost_strely = 10
 barva_strely = (zelena)
 v_strely = 2
 
-strela_w = velikost_strely
-strela_h = velikost_strely
-strela_x = zizala_x + zizala_w - strela_w
+strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
-strela = pygame.Rect(strela_x, strela_y, strela_w, strela_h)
+strela = strela_load.get_rect()
+strela.topleft = (strela_x, strela_y)
 strelba = False
 sledovani = True
 
@@ -172,13 +173,12 @@ vsechny_rady.append(rada4)
 vsechny_rady.append(rada5)
 
 #nepratelska strela
-nepratelska_strela_w = 10
-nepratelska_strela_h = 10
 random_rada = random.choice(vsechny_rady)
 random_vojak_v_rade = random.choice(random_rada)
 random_vojak_v_rade_x = random_vojak_v_rade.pozice[0]
 random_vojak_v_rade_y = random_vojak_v_rade.pozice[1]
-nepratelska_strela = pygame.Rect(random_vojak_v_rade_x, random_vojak_v_rade_y, nepratelska_strela_w, nepratelska_strela_h)
+nepratelska_strela = banan.get_rect()
+nepratelska_strela.topleft = (random_vojak_v_rade_x - 21, random_vojak_v_rade_y + 50)
 
 
 pygame.init()
@@ -216,9 +216,9 @@ while True:
     #sledovani_strely
     if sledovani:
         if strela.x > zizala_x: 
-            strela.x = zizala_x + zizala_w - strela.w
+            strela.x = zizala_x + zizala_w - 16
         if strela.x < zizala_x:
-            strela.x = zizala_x + zizala_w - strela.w
+            strela.x = zizala_x + zizala_w - 16
             
     #strelba
     if stisknuto[pygame.K_SPACE]:
@@ -234,7 +234,7 @@ while True:
         strelba = False
     if strelba == False:
         strela.y = zizala_y
-        strela.x = zizala_x + zizala_w - strela.w
+        strela.x = zizala_x + zizala_w - 16
     
     
     #pohyb_nepratel
@@ -326,8 +326,8 @@ while True:
     if nepratelska_strela.y >= ROZLISENI_Y:
         random_rada = random.choice(vsechny_rady)
         random_vojak_v_rade = random.choice(random_rada)
-        nepratelska_strela.x = random_vojak_v_rade.pozice[0]
-        nepratelska_strela.y = random_vojak_v_rade.pozice[1]
+        nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+        nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
         
     
     #1. rada nepratel
@@ -361,7 +361,7 @@ while True:
         
     #strela
     if strelba == True:
-        pygame.draw.rect(okno, (0,255,0), strela) 
+        okno.blit(strela_load, strela) 
         
     #spodni_hlina
     okno.blit(spodni_hlina, spodni_hlina_rect)
@@ -377,7 +377,7 @@ while True:
     okno.blit(vetsi_hlina, hlina4)
     okno.blit(mensi_hlina, hlina5)
     #nepratelska_strela
-    pygame.draw.rect(okno, zelena, nepratelska_strela)
+    okno.blit(banan, nepratelska_strela)
 
     
     
