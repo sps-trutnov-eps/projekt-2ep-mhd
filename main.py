@@ -16,13 +16,14 @@ BARVA_POZADI = cerna
 
 #obrazky
 zizala = pygame.image.load("zizala.gif")
-monke = pygame.image.load("monke.gif")
+monkey = pygame.image.load("monke.gif")
 house = pygame.image.load("mongol_house.gif")
 mensi_hlina = pygame.image.load("mensi_hlina.gif")
 vetsi_hlina = pygame.image.load("vetsi_hlina.gif")
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
 pozadi = pygame.image.load("pozadi.gif")
 strela_load = pygame.image.load("strela.gif")
+strela = strela_load.get_rect()
 banan = pygame.image.load("banan.gif")
 
 objekt = pygame.Rect
@@ -34,14 +35,15 @@ class nepritel(objekt):
         self.x = x
         self.y = y
         self.pozice = [self.x,self.y]
-        self.image = monke
+        self.image = monkey
+        self.rect = pygame.Rect(self.pozice,self.rozmer)
         self.v = 0.5
         self.zije = True
-        self.rada_nepratel1 = pygame.Rect
-        self.rada_nepratel2 = pygame.Rect
-        self.rada_nepratel3 = pygame.Rect
-        self.rada_nepratel4 = pygame.Rect
-        self.rada_nepratel5 = pygame.Rect
+    def prepocitat(self):
+        self.rect = pygame.Rect(self.pozice,self.rozmer)
+        
+    
+
         
 #pohyb nepratel
 pohyb_nepratel1 = True
@@ -69,7 +71,6 @@ v_strely = 2
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
-strela = strela_load.get_rect()
 strela.topleft = (strela_x, strela_y)
 strelba = False
 sledovani = True
@@ -108,26 +109,26 @@ vyska_domu = 50
 
 dum1_w = sirka_domu
 dum1_h = vyska_domu
-dum1_x = 150
-dum1_y = 855 + 25
+dum1_x = 50
+dum1_y = 805 + 25
 
 
 dum2_w = sirka_domu
 dum2_h = vyska_domu
-dum2_x = hlina2.x + hlina2.w - sirka_domu - 70
-dum2_y = 855 + 25
+dum2_x = hlina2.x + hlina2.w - sirka_domu - 100
+dum2_y = 805 + 25
 
 
 dum3_w = sirka_domu
 dum3_h = vyska_domu
-dum3_x = hlina4.x + 75
-dum3_y = 855 + 25
+dum3_x = hlina4.x + 10
+dum3_y = 805 + 25
 
 
 dum4_w = sirka_domu
 dum4_h = vyska_domu
 dum4_x = 1670
-dum4_y = 855 + 25
+dum4_y = 805 + 25
 
 
 dum1 = pygame.Rect(dum1_x, dum1_y, dum1_w, dum1_h)
@@ -244,80 +245,91 @@ while True:
             i.pozice[0] += i.v
         else:
             i.pozice[0] -= i.v
+        i.prepocitat()
+        
     for i in rada1:
         if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
             pohyb_nepratel1 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel1 = True
+        i.prepocitat()
 
     for i in rada2:
         if pohyb_nepratel2:
             i.pozice[0] += i.v
         else:
             i.pozice[0] -= i.v
+        i.prepocitat()
     for i in rada2:
         if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
             pohyb_nepratel2 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel2 = True
+        i.prepocitat()
 
     for i in rada3:
         if pohyb_nepratel3:
             i.pozice[0] += i.v
         else:
             i.pozice[0] -= i.v
+        i.prepocitat()
     for i in rada3:
         if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
             pohyb_nepratel3 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel3 = True
+        i.prepocitat()
 
     for i in rada4:
         if pohyb_nepratel4:
             i.pozice[0] += i.v
         else:
             i.pozice[0] -= i.v
+        i.prepocitat()
     for i in rada4:
         if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
             pohyb_nepratel4 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel4 = True
+        i.prepocitat()
 
     for i in rada5:
         if pohyb_nepratel5:
             i.pozice[0] += i.v
         else:
             i.pozice[0] -= i.v
+        i.prepocitat()
     for i in rada5:
         if i.pozice[0] + i.rozmer[0] >= ROZLISENI_X:
             pohyb_nepratel5 = False        
         elif i.pozice[0] <= 0:
             pohyb_nepratel5 = True
+        i.prepocitat()
             
             
     #kolize_strely_s_neprately(NON FUNCTIONAL)
     for i in rada1:
-        if pygame.Rect.colliderect(i ,strela):
+        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
             i.zije = False
             strelba = False
 
     for i in rada2:
-        if pygame.Rect.colliderect(i ,strela):
+        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
             i.zije = False
             strelba = False
             
     for i in rada3:
-        if pygame.Rect.colliderect(i ,strela):
+        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
             i.zije = False
             strelba = False
            
     for i in rada4:
-        if pygame.Rect.colliderect(i ,strela):
+        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
             i.zije = False
             strelba = False
             
     for i in rada5:
-        if pygame.Rect.colliderect(i ,strela):
+        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
             i.zije = False
             strelba = False
     
@@ -331,29 +343,29 @@ while True:
         
     
     #1. rada nepratel
-    if i.zije == True:
-        for i in rada1:
-            okno.blit(monke, (i.pozice,i.rozmer))
+    for i in rada1:
+        if i.zije == True:
+            okno.blit(i.image, i.pozice)
             
     #2. rada nepratel
-    if i.zije == True:
-        for i in rada2:
-            okno.blit(monke, (i.pozice,i.rozmer))
+    for i in rada2:
+        if i.zije == True:
+            okno.blit(i.image, i.pozice)
 
     #3. rada nepratel
-    if i.zije == True:
-        for i in rada3:
-            okno.blit(monke, (i.pozice,i.rozmer))
+    for i in rada3:
+        if i.zije == True:
+            okno.blit(i.image, i.pozice)
 
     #4. rada nepratel
-    if i.zije == True:
-        for i in rada4:
-            okno.blit(monke, (i.pozice,i.rozmer))
+    for i in rada4:
+        if i.zije == True:
+            okno.blit(i.image, i.pozice)
 
     #5. rada nepratel
-    if i.zije == True:
-        for i in rada5:
-            okno.blit(monke, (i.pozice,i.rozmer))
+    for i in rada5:
+        if i.zije == True:
+            okno.blit(i.image, i.pozice)
 
     #zizala
     if zizala_zije == True:
