@@ -67,7 +67,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 2
+v_strely = 10
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -181,6 +181,9 @@ random_vojak_v_rade_y = random_vojak_v_rade.pozice[1]
 nepratelska_strela = banan.get_rect()
 nepratelska_strela.topleft = (random_vojak_v_rade_x - 21, random_vojak_v_rade_y + 50)
 
+#random výběr
+random_vyber = True
+random_vojak = True
 
 pygame.init()
 
@@ -305,41 +308,59 @@ while True:
         elif i.pozice[0] <= 0:
             pohyb_nepratel5 = True
         i.prepocitat()
-            
-            
-    #kolize_strely_s_neprately(NON FUNCTIONAL)
+        
+    
+        
+                       
+    #kolize strely s neprately
     for i in rada1:
-        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
-            i.zije = False
+        if pygame.Rect.colliderect(i.rect ,strela):
+            
             strelba = False
+            rada1.remove(i)
 
     for i in rada2:
-        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
-            i.zije = False
+        if pygame.Rect.colliderect(i.rect ,strela):
+            
             strelba = False
+            rada2.remove(i)
             
     for i in rada3:
-        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
-            i.zije = False
+        if pygame.Rect.colliderect(i.rect ,strela):
+            
             strelba = False
+            rada3.remove(i)
            
     for i in rada4:
-        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
-            i.zije = False
+        if pygame.Rect.colliderect(i.rect ,strela):
+            
             strelba = False
+            rada4.remove(i)
             
     for i in rada5:
-        if pygame.Rect.colliderect(i.rect ,strela) and i.zije:
-            i.zije = False
+        if pygame.Rect.colliderect(i.rect ,strela):
+            
             strelba = False
+            rada5.remove(i)
+            
+    for i in vsechny_rady:
+        if i == [0]:
+            vsechny_rady.remove(i)
+        
+    if vsechny_rady == [0]:
+        pygame.quit()
+        sys.exit()
+        random_vyber = False
     
     #pohyb_nepratelske_strely
     nepratelska_strela.y += 1
-    if nepratelska_strela.y >= ROZLISENI_Y:
-        random_rada = random.choice(vsechny_rady)
-        random_vojak_v_rade = random.choice(random_rada)
-        nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
-        nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+    if random_vyber:
+        if nepratelska_strela.y >= ROZLISENI_Y:        
+            random_rada = random.choice(vsechny_rady)
+            if random_vojak:
+                random_vojak_v_rade = random.choice(random_rada)
+            nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+            nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50   
         
     
     #1. rada nepratel
