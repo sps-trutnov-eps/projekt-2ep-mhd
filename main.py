@@ -17,15 +17,17 @@ BARVA_POZADI = cerna
 #obrazky
 zizala = pygame.image.load("zizala.gif")
 monkey = pygame.image.load("monke.gif")
-house = pygame.image.load("mongol_house.gif")
-mensi_hlina = pygame.image.load("mensi_hlina.gif")
+house1_vykres = pygame.image.load("mongol_house.gif")
+house2_vykres = pygame.image.load("mongol_house.gif")
+house3_vykres = pygame.image.load("mongol_house.gif")
+house4_vykres = pygame.image.load("mongol_house.gif")
+hlina1_vykres = pygame.image.load("mensi_hlina.gif")
+hlina5_vykres = pygame.image.load("mensi_hlina.gif")
 vetsi_hlina = pygame.image.load("vetsi_hlina.gif")
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
 pozadi = pygame.image.load("pozadi.gif")
 strela_load = pygame.image.load("strela.gif")
-strela = strela_load.get_rect()
 banan = pygame.image.load("banan.gif")
-
 objekt = pygame.Rect
 
 #rozměry pro nepřátele
@@ -41,10 +43,7 @@ class nepritel(objekt):
         self.zije = True
     def prepocitat(self):
         self.rect = pygame.Rect(self.pozice,self.rozmer)
-        
-    
-
-        
+                
 #pohyb nepratel
 pohyb_nepratel1 = True
 pohyb_nepratel2 = True
@@ -71,6 +70,7 @@ v_strely = 10
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
+strela = strela_load.get_rect()
 strela.topleft = (strela_x, strela_y)
 strelba = False
 sledovani = True
@@ -88,8 +88,9 @@ h_hliny = 30
 x_hliny = 0
 y_hliny = zizala_y - zizala_h - 25
 
-hlina1 = mensi_hlina.get_rect()
+hlina1 = hlina1_vykres.get_rect()
 hlina1.topleft = (0,y_hliny)
+demolice_hliny1 = False
 
 hlina2 = vetsi_hlina.get_rect()
 hlina2.topleft = (2*w_hliny, y_hliny)
@@ -100,7 +101,7 @@ hlina3.topleft = (3*w_hliny + 80, y_hliny)
 hlina4 = vetsi_hlina.get_rect()
 hlina4.topleft = (5*w_hliny-80, y_hliny)
 
-hlina5 = mensi_hlina.get_rect()
+hlina5 = hlina5_vykres.get_rect()
 hlina5.topleft = (0-25 + 7*w_hliny,y_hliny)
 
 #domy
@@ -111,31 +112,38 @@ dum1_w = sirka_domu
 dum1_h = vyska_domu
 dum1_x = 50
 dum1_y = 805 + 25
-
+house1 = house1_vykres.get_rect()
+house1.topleft = (dum1_x, dum1_y)
+demolice_domu1_house1 = False
+demolice_domu2_house1 = False
+demolice_domu3_house1 = False
+demolice_domu4_house1 = False
 
 dum2_w = sirka_domu
 dum2_h = vyska_domu
 dum2_x = hlina2.x + hlina2.w - sirka_domu - 100
 dum2_y = 805 + 25
+house2 = house2_vykres.get_rect()
+house2.topleft = (dum1_x, dum1_y)
 
 
 dum3_w = sirka_domu
 dum3_h = vyska_domu
 dum3_x = hlina4.x + 10
 dum3_y = 805 + 25
+house3 = house3_vykres.get_rect()
+house3.topleft = (dum1_x, dum1_y)
 
 
 dum4_w = sirka_domu
 dum4_h = vyska_domu
 dum4_x = 1670
 dum4_y = 805 + 25
+house4 = house4_vykres.get_rect()
+house4.topleft = (dum1_x, dum1_y)
 
 
-dum1 = pygame.Rect(dum1_x, dum1_y, dum1_w, dum1_h)
-dum2 = pygame.Rect(dum2_x, dum2_y, dum2_w, dum2_h)
-dum3 = pygame.Rect(dum3_x, dum3_y, dum3_w, dum3_h)
-dum4 = pygame.Rect(dum4_x, dum4_y, dum4_w, dum4_h)
- 
+
 #nepratele - 1.rada
 rada1 = []
 for i in range(11):
@@ -357,11 +365,44 @@ while True:
     if random_vyber:
         if nepratelska_strela.y >= ROZLISENI_Y:        
             random_rada = random.choice(vsechny_rady)
-            if random_vojak:
-                random_vojak_v_rade = random.choice(random_rada)
+            random_vojak_v_rade = random.choice(random_rada)
             nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
-            nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50   
+            nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+            
+    #demolice domu
+    if pygame.Rect.colliderect(house1, nepratelska_strela) or pygame.Rect.colliderect(hlina1, nepratelska_strela) and demolice_domu2_house1 == False:
+        house1_vykres = pygame.image.load("house_boom1.gif")
+        demolice_domu1_house1 = True
+        random_rada = random.choice(vsechny_rady)
+        random_vojak_v_rade = random.choice(random_rada)
+        nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+        nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
         
+        
+    elif pygame.Rect.colliderect(house1, nepratelska_strela) or pygame.Rect.colliderect(hlina1, nepratelska_strela):
+        if demolice_domu1_house1:
+            house1_vykres = pygame.image.load("house_boom2.gif")
+            random_rada = random.choice(vsechny_rady)
+            random_vojak_v_rade = random.choice(random_rada)
+            nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+            nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+        
+                    
+    #demolice hliny1
+    #if pygame.Rect.colliderect(hlina1,nepratelska_strela) and demolice_hliny1 == False:
+        #hlina1_vykres = pygame.image.load("mensi_hlina_znicena.gif")
+        #demolice_hliny1 = True
+        #random_rada = random.choice(vsechny_rady)
+        #random_vojak_v_rade = random.choice(random_rada)
+        #nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+        #nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+        
+    #elif demolice_hliny1 == True and pygame.Rect.colliderect(hlina1,nepratelska_strela):
+        #hlina1_vykres = pygame.image.load("mensi_hlina_slus.gif")
+        #random_rada = random.choice(vsechny_rady)
+        #random_vojak_v_rade = random.choice(random_rada)
+        #nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
+        #nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
     
     #1. rada nepratel
     for i in rada1:
@@ -399,16 +440,16 @@ while True:
     #spodni_hlina
     okno.blit(spodni_hlina, spodni_hlina_rect)
     #domy
-    okno.blit(house, (dum1_x, dum1_y))
-    okno.blit(house, (dum2_x, dum2_y))
-    okno.blit(house, (dum3_x, dum3_y))
-    okno.blit(house, (dum4_x, dum4_y))
+    okno.blit(house1_vykres, (dum1_x, dum1_y))
+    okno.blit(house2_vykres, (dum2_x, dum2_y))
+    okno.blit(house3_vykres, (dum3_x, dum3_y))
+    okno.blit(house4_vykres, (dum4_x, dum4_y))
     #hlina
-    okno.blit(mensi_hlina, hlina1)
+    okno.blit(hlina1_vykres, hlina1)
     okno.blit(vetsi_hlina, hlina2)
     okno.blit(vetsi_hlina, hlina3)    
     okno.blit(vetsi_hlina, hlina4)
-    okno.blit(mensi_hlina, hlina5)
+    okno.blit(hlina5_vykres, hlina5)
     #nepratelska_strela
     okno.blit(banan, nepratelska_strela)
 
