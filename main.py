@@ -66,7 +66,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 10
+v_strely = 1.5
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -233,13 +233,9 @@ while True:
             strela.x = zizala_x + zizala_w - 16
             
     #strelba
-    if stisknuto[pygame.K_SPACE]:
-        strelba = True
-
     if strelba == True:
         strela.y -= v_strely
         sledovani = False
-    
     
     #kontinualni_strelba
     if strela.y < 0:
@@ -247,6 +243,10 @@ while True:
     if strelba == False:
         strela.y = zizala_y
         strela.x = zizala_x + zizala_w - 16
+
+    #strelba
+    if stisknuto[pygame.K_SPACE]:
+        strelba = True
     
     
     #pohyb_nepratel
@@ -316,38 +316,31 @@ while True:
         elif i.pozice[0] <= 0:
             pohyb_nepratel5 = True
         i.prepocitat()
-        
-    
-        
+
                        
     #kolize strely s neprately
     for i in rada1:
         if pygame.Rect.colliderect(i.rect ,strela):
-            
             strelba = False
             rada1.remove(i)
 
     for i in rada2:
         if pygame.Rect.colliderect(i.rect ,strela):
-            
             strelba = False
             rada2.remove(i)
             
     for i in rada3:
         if pygame.Rect.colliderect(i.rect ,strela):
-            
             strelba = False
             rada3.remove(i)
            
     for i in rada4:
         if pygame.Rect.colliderect(i.rect ,strela):
-            
             strelba = False
             rada4.remove(i)
             
     for i in rada5:
         if pygame.Rect.colliderect(i.rect ,strela):
-            
             strelba = False
             rada5.remove(i)
             
