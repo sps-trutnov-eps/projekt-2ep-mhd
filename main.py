@@ -15,7 +15,7 @@ zelena = (0,255,0)
 BARVA_POZADI = cerna
 
 #obrazky
-zizala = pygame.image.load("zizala.gif")
+zizala_load = pygame.image.load("zizala.gif")
 monkey = pygame.image.load("monke.gif")
 house1_vykres = pygame.image.load("mongol_house.gif")
 house2_vykres = pygame.image.load("mongol_house.gif")
@@ -60,6 +60,7 @@ zizala_w = velikost_zizaly
 zizala_h = velikost_zizaly
 zizala_x = ROZLISENI_X/2 - velikost_zizaly/2
 zizala_y = ROZLISENI_Y + 25 -velikost_zizaly*2
+zizala = zizala_load.get_rect()
 
 zizala_zije = True
 
@@ -224,6 +225,7 @@ while True:
         zizala_x = 0
     if zizala_x > ROZLISENI_X - velikost_zizaly:
         zizala_x = ROZLISENI_X - velikost_zizaly
+    zizala.topleft = (zizala_x, zizala_y)
 
     #sledovani_strely
     if sledovani:
@@ -316,6 +318,10 @@ while True:
         elif i.pozice[0] <= 0:
             pohyb_nepratel5 = True
         i.prepocitat()
+        
+    #kolize_zizaly_s_nepratelskou_strelou
+    if pygame.Rect.colliderect(nepratelska_strela, zizala):
+        zizala_zije = False
 
                        
     #kolize strely s neprately
@@ -424,7 +430,7 @@ while True:
 
     #zizala
     if zizala_zije == True:
-        okno.blit(zizala, (zizala_x, zizala_y))
+        okno.blit(zizala_load, zizala)
         
     #strela
     if strelba == True:
