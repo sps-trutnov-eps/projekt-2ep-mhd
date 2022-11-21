@@ -346,6 +346,20 @@ while program_bezi:
             pohyb_nepratel5 = True
         i.prepocitat()
         
+    if rada1 == []:
+        vsechny_rady.remove(rada1)
+    if rada2 == []:
+        vsechny_rady.remove(rada2)
+    if rada3 == []:
+        vsechny_rady.remove(rada3)
+    if rada4 == []:
+        vsechny_rady.remove(rada4)
+    if rada5 == []:
+        vsechny_rady.remove(rada5)
+    if vsechny_rady == []:
+        pygame.quit()
+        sys.exit
+        
     #kolize_zizaly_s_nepratelskou_strelou
     if pygame.Rect.colliderect(nepratelska_strela, zizala):
         zizala_zije = False
