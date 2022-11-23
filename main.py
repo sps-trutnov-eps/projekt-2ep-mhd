@@ -202,12 +202,8 @@ for i in range(11):
     n = nepritel((310 + 125*i),500)
     rada5.append(n)
     
-vsechny_rady = []
-vsechny_rady.append(rada1)
-vsechny_rady.append(rada2)
-vsechny_rady.append(rada3)
-vsechny_rady.append(rada4)
-vsechny_rady.append(rada5)
+vsechny_rady = [rada1, rada2, rada3, rada4, rada5]
+
 
 #nepratelska strela
 random_rada = random.choice(vsechny_rady)
@@ -346,19 +342,7 @@ while program_bezi:
             pohyb_nepratel5 = True
         i.prepocitat()
         
-    if rada1 == []:
-        vsechny_rady.remove(rada1)
-    if rada2 == []:
-        vsechny_rady.remove(rada2)
-    if rada3 == []:
-        vsechny_rady.remove(rada3)
-    if rada4 == []:
-        vsechny_rady.remove(rada4)
-    if rada5 == []:
-        vsechny_rady.remove(rada5)
-    if vsechny_rady == []:
-        pygame.quit()
-        sys.exit
+
         
     #kolize_zizaly_s_nepratelskou_strelou
     if pygame.Rect.colliderect(nepratelska_strela, zizala):
@@ -392,13 +376,14 @@ while program_bezi:
             rada5.remove(i)
             
     for i in vsechny_rady:
-        if i == [0]:
+        if i == []:
             vsechny_rady.remove(i)
         
-    if vsechny_rady == [0]:
+    if vsechny_rady == []:
         pygame.quit()
         sys.exit()
         random_vyber = False
+        
     
     #pohyb_nepratelske_strely
     nepratelska_strela.y += 3
