@@ -6,8 +6,9 @@ ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
 cas = pygame.time.Clock()
 
 program_bezi = True
-winner = False
 game_over_TF = True
+hrajem = True
+winner = False
 
 #barvy
 cerna = (0,0,0)
@@ -18,12 +19,10 @@ seda = (128,128,128)
 zelena = (0,255,0)
 cervena = (255,0,0)
 BARVA_POZADI = cerna
-hrajem = True
-
 
 #Game over text
 game_over = pygame.image.load("game_over.png")
-winner = pygame.image.load("winner.png")
+winner_ = pygame.image.load("winner.png")
 
 #obrazky
 zizala_load = pygame.image.load("zizala.gif")
@@ -247,7 +246,7 @@ while program_bezi:
     if stisknuto[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-    if hrajem:    
+    if hrajem == True:    
         #ovladani_zizaly
         if stisknuto[pygame.K_RIGHT]:
             zizala_x += v_zizaly
@@ -351,13 +350,11 @@ while program_bezi:
                 pohyb_nepratel5 = True
             i.prepocitat()
             
-
             
         #kolize_zizaly_s_nepratelskou_strelou
         if pygame.Rect.colliderect(nepratelska_strela, zizala):
             hrajem = False
-            game_over_TF = True
-            
+            game_over_TF = False
 
                            
         #kolize strely s neprately
@@ -389,7 +386,7 @@ while program_bezi:
         for i in vsechny_rady:
             if i == []:
                 vsechny_rady.remove(i)
-            
+                
         if vsechny_rady == []:
             hrajem = False
             winner = True
@@ -719,10 +716,10 @@ while program_bezi:
     #nepratelska_strela
     okno.blit(banan, nepratelska_strela)
     #Game over
-    if game_over_TF and not hrajem and not winner:
+    if game_over_TF == False:
         okno.blit(game_over, (ROZLISENI_X/2 - 576/2, ROZLISENI_Y/2 - 470/2))
-    if not hrajem and not game_over_TF and winner:
-        okno.blit(winner,(ROZLISENI_X/2 - 690/2, ROZLISENI_Y/2 - 250/2))
+    if winner == True:
+        okno.blit(winner_, (ROZLISENI_X/2 - 690/2, ROZLISENI_Y/2 - 250/2))
         
 
         
