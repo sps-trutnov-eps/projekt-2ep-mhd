@@ -356,9 +356,35 @@ while program_bezi:
             
         #kolize_zizaly_s_nepratelskou_strelou
         if pygame.Rect.colliderect(nepratelska_strela, zizala):
+            zizala_zije = False
             hrajem = False
             game_over_TF = False
-
+            
+        #kolize_strely_zizaly_s_hlinou
+        if pygame.Rect.colliderect(strela, hlina1):
+            zizala_zije = False
+            hrajem = False
+            game_over_TF = False
+            
+        if pygame.Rect.colliderect(strela, hlina2):
+            zizala_zije = False
+            hrajem = False
+            game_over_TF = False
+            
+        if pygame.Rect.colliderect(strela, hlina3):
+            zizala_zije = False
+            hrajem = False
+            game_over_TF = False
+            
+        if pygame.Rect.colliderect(strela, hlina4):
+            zizala_zije = False
+            hrajem = False
+            game_over_TF = False
+            
+        if pygame.Rect.colliderect(strela, hlina5):
+            zizala_zije = False
+            hrajem = False
+            game_over_TF = False
                            
         #kolize strely s neprately
         for i in rada1:
