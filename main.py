@@ -1,6 +1,7 @@
 import sys
 import pygame
 import random
+pygame.init()
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
 cas = pygame.time.Clock()
@@ -42,6 +43,9 @@ strela_load = pygame.image.load("strela.gif")
 banan = pygame.image.load("banan.gif")
 objekt = pygame.Rect
 
+#zvuky
+zvuk_strelby = pygame.mixer.Sound("BFG1.wav")
+
 #rozměry pro nepřátele
 class nepritel(objekt):
     def __init__(self, x, y):
@@ -79,7 +83,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 15
+v_strely = 3
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -225,8 +229,6 @@ nepratelska_strela.topleft = (random_vojak_v_rade_x - 21, random_vojak_v_rade_y 
 random_vyber = True
 random_vojak = True
 
-pygame.init()
-
 pygame.display.set_caption('Mongol House Defense')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
 
@@ -280,10 +282,11 @@ while program_bezi:
         #strelba
         if stisknuto[pygame.K_SPACE]:
             strelba = True
-        
+            
+        if strela.y == 990:
+            zvuk_strelby.play()
         
         #pohyb_nepratel
-
         for i in rada1:
             if pohyb_nepratel1:
                 i.pozice[0] += i.v
