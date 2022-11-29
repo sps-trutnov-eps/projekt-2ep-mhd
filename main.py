@@ -45,6 +45,7 @@ objekt = pygame.Rect
 
 #zvuky
 zvuk_strelby = pygame.mixer.Sound("BFG1.wav")
+zvuk_nepratelske_strelby = pygame.mixer.Sound("banan.wav")
 
 #rozměry pro nepřátele
 class nepritel(objekt):
@@ -70,7 +71,7 @@ pohyb_nepratel5 = True
 #rozmery zizaly
 velikost_zizaly = 50
 barva_zizaly = (ruzova)
-v_zizaly = 2
+v_zizaly = 3
 
 zizala_w = velikost_zizaly
 zizala_h = velikost_zizaly
@@ -190,7 +191,6 @@ demolice_hliny1_hlina4 = False
 demolice_hliny0_hlina5 = False
 demolice_hliny1_hlina5 = False
 
-
 #nepratele - 1.rada
 rada1 = []
 for i in range(11):
@@ -229,8 +229,18 @@ random_rada = random.choice(vsechny_rady)
 random_vojak_v_rade = random.choice(random_rada)
 random_vojak_v_rade_x = random_vojak_v_rade.pozice[0]
 random_vojak_v_rade_y = random_vojak_v_rade.pozice[1]
+zvuk_nepratelske_strelby.play()
 nepratelska_strela = banan.get_rect()
 nepratelska_strela.topleft = (random_vojak_v_rade_x - 21, random_vojak_v_rade_y + 50)
+
+vsechny_domy = []
+vsechny_domy.append(house1)
+vsechny_domy.append(house2)
+vsechny_domy.append(house3)
+vsechny_domy.append(house4)
+if vsechny_domy == []:
+    game_over_TF = False
+    print("prazdne domy")
 
 #random výběr
 random_vyber = True
@@ -407,11 +417,13 @@ while program_bezi:
         #pohyb_nepratelske_strely
         nepratelska_strela.y += 3
         if random_vyber:
-            if nepratelska_strela.y >= ROZLISENI_Y:        
+            if nepratelska_strela.y >= ROZLISENI_Y:
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
+                
                 
         #demolice domu1
         if demolice_domu0_house1 == True:
@@ -423,7 +435,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
-            
+                zvuk_nepratelske_strelby.play()
             
         if demolice_domu1_house1 == True:
             if pygame.Rect.colliderect(house1, nepratelska_strela) or pygame.Rect.colliderect(hlina1, nepratelska_strela):
@@ -434,6 +446,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu2_house1 == True:
             if pygame.Rect.colliderect(house1, nepratelska_strela) or pygame.Rect.colliderect(hlina1, nepratelska_strela):
@@ -444,9 +457,11 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu3_house1 == True:
             if pygame.Rect.colliderect(house1, nepratelska_strela) or pygame.Rect.colliderect(hlina1, nepratelska_strela):
+                vsechny_domy.remove(house1)
                 house1_vykres = pygame.image.load("house_boom4.gif")
                 demolice_domu3_house1 = False
                 demolice_hliny0_hlina1 = True
@@ -454,6 +469,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny0_hlina1:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela) and demolice_hliny1 == False:
@@ -464,6 +480,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina1:
             if  pygame.Rect.colliderect(hlina1,nepratelska_strela):
@@ -472,6 +489,7 @@ while program_bezi:
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                    zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny1 = False
                 
         #demolice domu2
@@ -484,6 +502,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
             
             
         if demolice_domu1_house2 == True:
@@ -495,6 +514,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu2_house2 == True:
             if pygame.Rect.colliderect(house2, nepratelska_strela) or pygame.Rect.colliderect(hlina2, nepratelska_strela):
@@ -505,9 +525,11 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu3_house2 == True:
             if pygame.Rect.colliderect(house2, nepratelska_strela) or pygame.Rect.colliderect(hlina2, nepratelska_strela):
+                vsechny_domy.remove(house2)
                 house2_vykres = pygame.image.load("house_boom4.gif")
                 demolice_domu3_house2 = False
                 demolice_hliny0_hlina2 = True
@@ -515,6 +537,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny0_hlina2:
             if pygame.Rect.colliderect(hlina2,nepratelska_strela):
@@ -525,6 +548,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina2:
             if  pygame.Rect.colliderect(hlina2,nepratelska_strela):
@@ -533,6 +557,7 @@ while program_bezi:
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                    zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny2 = False
 
                 
@@ -546,6 +571,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
             
             
         if demolice_domu1_house3 == True:
@@ -557,6 +583,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu2_house3 == True:
             if pygame.Rect.colliderect(house3, nepratelska_strela) or pygame.Rect.colliderect(hlina4, nepratelska_strela):
@@ -567,9 +594,11 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu3_house3 == True:
             if pygame.Rect.colliderect(house3, nepratelska_strela) or pygame.Rect.colliderect(hlina4, nepratelska_strela):
+                vsechny_domy.remove(house3)
                 house3_vykres = pygame.image.load("house_boom4.gif")
                 demolice_domu3_house3 = False
                 demolice_hliny0_hlina4 = True
@@ -577,6 +606,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny0_hlina4:
             if pygame.Rect.colliderect(hlina4,nepratelska_strela):
@@ -587,6 +617,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina4:
             if  pygame.Rect.colliderect(hlina4,nepratelska_strela):
@@ -595,6 +626,7 @@ while program_bezi:
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                    zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny4 = False
                 
         #demolice_domu4
@@ -607,6 +639,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
             
             
         if demolice_domu1_house4 == True:
@@ -618,6 +651,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu2_house4 == True:
             if pygame.Rect.colliderect(house4, nepratelska_strela) or pygame.Rect.colliderect(hlina5, nepratelska_strela):
@@ -628,9 +662,11 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
                 
         if demolice_domu3_house4 == True:
             if pygame.Rect.colliderect(house4, nepratelska_strela) or pygame.Rect.colliderect(hlina5, nepratelska_strela):
+                vsechny_domy.remove(house4)
                 house4_vykres = pygame.image.load("house_boom4.gif")
                 demolice_domu3_house4 = False
                 demolice_hliny0_hlina5 = True
@@ -638,6 +674,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny0_hlina5:
             if pygame.Rect.colliderect(hlina5,nepratelska_strela):
@@ -648,6 +685,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina5:
             if  pygame.Rect.colliderect(hlina5,nepratelska_strela):
@@ -656,6 +694,7 @@ while program_bezi:
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                    zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny5 = False
 
                 
@@ -669,6 +708,7 @@ while program_bezi:
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina3:
             if  pygame.Rect.colliderect(hlina3,nepratelska_strela):
@@ -677,6 +717,7 @@ while program_bezi:
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
+                    zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny3 = False
                 
         #kolize_strely_zizaly_s_hlinou
