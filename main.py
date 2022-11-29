@@ -84,7 +84,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 3
+v_strely = 13
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
