@@ -28,10 +28,10 @@ winner_ = pygame.image.load("winner.png")
 
 
 #skore
-score_font = pygame.font.SysFont("Courier New",60)
+score_font = pygame.font.Font("font.ttf", 50)
 score = 0
 
-font1 = pygame.font.SysFont("Courier New", 60)
+font1 = pygame.font.Font("font.ttf", 50)
 text1 = font1.render("score:", True, cerna)
 
 #obrazky
@@ -55,6 +55,8 @@ objekt = pygame.Rect
 #zvuky
 zvuk_strelby = pygame.mixer.Sound("BFG1.wav")
 zvuk_nepratelske_strelby = pygame.mixer.Sound("banan.wav")
+zvuk_game_over = pygame.mixer.Sound("game_over.wav")
+zvuk_winner = pygame.mixer.Sound("win.wav")
 
 #rozměry pro nepřátele
 class nepritel(objekt):
@@ -93,7 +95,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 13
+v_strely = 5
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -310,7 +312,7 @@ while program_bezi:
         if stisknuto[pygame.K_SPACE]:
             strelba = True
             
-        if strela.y == 990:
+        if strela.y == 985:
             zvuk_strelby.play()
         
         #pohyb_nepratel
@@ -386,7 +388,7 @@ while program_bezi:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
             
                            
         #kolize strely s neprately
@@ -428,10 +430,11 @@ while program_bezi:
             hrajem = False
             winner = True
             random_vyber = False
+            zvuk_winner.play()
             
         
         #pohyb_nepratelske_strely
-        nepratelska_strela.y += 5
+        nepratelska_strela.y += 3
         if random_vyber:
             if nepratelska_strela.y >= ROZLISENI_Y:
                 random_rada = random.choice(vsechny_rady)
@@ -497,7 +500,6 @@ while program_bezi:
                 hlina1_vykres = pygame.image.load("mensi_hlina_znicena.gif")
                 demolice_hliny0_hlina1 = False
                 demolice_hliny1_hlina1 = True
-                score -= 100
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -508,7 +510,6 @@ while program_bezi:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela):
                 
                 if vykreslovani_hliny1:
-                    score -= 100
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -573,7 +574,6 @@ while program_bezi:
                 hlina2_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina2 = False
                 demolice_hliny1_hlina2 = True
-                score -= 100
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -584,7 +584,6 @@ while program_bezi:
             if  pygame.Rect.colliderect(hlina2,nepratelska_strela):
                 
                 if vykreslovani_hliny2:
-                    score -= 100
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -650,7 +649,6 @@ while program_bezi:
                 hlina4_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina4 = False
                 demolice_hliny1_hlina4 = True
-                score -= 100
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -660,7 +658,6 @@ while program_bezi:
         if demolice_hliny1_hlina4:
             if  pygame.Rect.colliderect(hlina4,nepratelska_strela):
                 if vykreslovani_hliny4:
-                    score -= 100
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -725,7 +722,6 @@ while program_bezi:
                 hlina5_vykres = pygame.image.load("mensi_hlina_znicena.gif")
                 demolice_hliny0_hlina5 = False
                 demolice_hliny1_hlina5 = True
-                score -= 100
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -735,7 +731,6 @@ while program_bezi:
         if demolice_hliny1_hlina5:
             if  pygame.Rect.colliderect(hlina5,nepratelska_strela):
                 if vykreslovani_hliny5:
-                    score -= 100
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -750,7 +745,6 @@ while program_bezi:
                 hlina3_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina3 = False
                 demolice_hliny1_hlina3 = True
-                score -= 100
                 random_rada = random.choice(vsechny_rady)
                 random_vojak_v_rade = random.choice(random_rada)
                 nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -760,7 +754,6 @@ while program_bezi:
         if demolice_hliny1_hlina3:
             if  pygame.Rect.colliderect(hlina3,nepratelska_strela):
                 if vykreslovani_hliny3:
-                    score -= 100
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
                     nepratelska_strela.x = random_vojak_v_rade.pozice[0] - 21
@@ -773,36 +766,42 @@ while program_bezi:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
+            
             
         if pygame.Rect.colliderect(strela, hlina2) and vykreslovani_hliny2:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
+            
             
         if pygame.Rect.colliderect(strela, hlina3) and vykreslovani_hliny3:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
+            
             
         if pygame.Rect.colliderect(strela, hlina4) and vykreslovani_hliny4:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
+            
             
         if pygame.Rect.colliderect(strela, hlina5) and vykreslovani_hliny5:
             zizala_zije = False
             hrajem = False
             game_over_TF = False
-            score = 0
+            zvuk_game_over.play()
+            
                 
-    if vsechny_domy == []:
-        game_over_TF = False
-        hrajem = False
-        score = 0
+        if vsechny_domy == []:
+            game_over_TF = False
+            hrajem = False
+            zvuk_game_over.play()
+        
         
         
     #1. rada nepratel
@@ -865,14 +864,13 @@ while program_bezi:
     #Game over
     if game_over_TF == False:
         okno.blit(game_over, (ROZLISENI_X/2 - 576/2, ROZLISENI_Y/2 - 470/2))
+        
     if winner == True:
         okno.blit(winner_, (ROZLISENI_X/2 - 690/2, ROZLISENI_Y/2 - 250/2))
     #score
     score_text = score_font.render(str(score),True,cerna)
-    okno.blit(score_text, (ROZLISENI_X - 200, 30))
-    okno.blit(text1, (ROZLISENI_X - 200 - 230 , 30))
-        
-
+    okno.blit(score_text, (ROZLISENI_X - 165, 30))
+    okno.blit(text1, (ROZLISENI_X - 200 - 165, 30))
         
         
     pygame.display.update()
