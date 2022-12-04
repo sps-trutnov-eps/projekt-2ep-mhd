@@ -41,11 +41,11 @@ house1_vykres = pygame.image.load("mongol_house.gif")
 house2_vykres = pygame.image.load("mongol_house.gif")
 house3_vykres = pygame.image.load("mongol_house.gif")
 house4_vykres = pygame.image.load("mongol_house.gif")
-hlina1_vykres = pygame.image.load("mensi_hlina.gif")
+hlina1_vykres = pygame.image.load("vetsi_hlina.gif")
 hlina2_vykres = pygame.image.load("vetsi_hlina.gif")
 hlina3_vykres = pygame.image.load("vetsi_hlina.gif")
 hlina4_vykres = pygame.image.load("vetsi_hlina.gif")
-hlina5_vykres = pygame.image.load("mensi_hlina.gif") 
+hlina5_vykres = pygame.image.load("vetsi_hlina.gif") 
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
 pozadi = pygame.image.load("pozadi.gif")
 strela_load = pygame.image.load("strela.gif")
@@ -497,7 +497,7 @@ while program_bezi:
         
         if demolice_hliny0_hlina1:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela):
-                hlina1_vykres = pygame.image.load("mensi_hlina_znicena.gif")
+                hlina1_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina1 = False
                 demolice_hliny1_hlina1 = True
                 random_rada = random.choice(vsechny_rady)
@@ -508,7 +508,6 @@ while program_bezi:
         
         if demolice_hliny1_hlina1:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela):
-                
                 if vykreslovani_hliny1:
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
@@ -581,8 +580,7 @@ while program_bezi:
                 zvuk_nepratelske_strelby.play()
         
         if demolice_hliny1_hlina2:
-            if  pygame.Rect.colliderect(hlina2,nepratelska_strela):
-                
+            if pygame.Rect.colliderect(hlina2,nepratelska_strela):
                 if vykreslovani_hliny2:
                     random_rada = random.choice(vsechny_rady)
                     random_vojak_v_rade = random.choice(random_rada)
@@ -719,7 +717,7 @@ while program_bezi:
         
         if demolice_hliny0_hlina5:
             if pygame.Rect.colliderect(hlina5,nepratelska_strela):
-                hlina5_vykres = pygame.image.load("mensi_hlina_znicena.gif")
+                hlina5_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina5 = False
                 demolice_hliny1_hlina5 = True
                 random_rada = random.choice(vsechny_rady)
