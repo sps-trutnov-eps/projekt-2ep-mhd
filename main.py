@@ -10,7 +10,11 @@ program_bezi = True
 game_over_TF = True
 hrajem = True
 winner = False
+smrtici_strela = True
 
+#čas
+cas_nyni = 0
+cas_stisknuti = 0
 #barvy
 cerna = (0,0,0)
 bila = (255,255,255)
@@ -20,11 +24,15 @@ seda = (128,128,128)
 zelena = (0,255,0)
 cervena = (255,0,0)
 BARVA_POZADI = cerna
+barva_fontu1 = (zelena)
+barva_fontu2 = (zelena)
 
 #Game over text
 game_over = pygame.image.load("game_over.png")
 winner_ = pygame.image.load("winner.png")
 
+#Power-up text
+pu_font = pygame.font.Font("font.ttf",30)
 
 
 #skore
@@ -95,7 +103,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 5
+v_strely = 15
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -131,7 +139,7 @@ hlina4 = hlina4_vykres.get_rect()
 hlina4.topleft = (5*w_hliny-80, y_hliny)
 
 hlina5 = hlina5_vykres.get_rect() 
-hlina5.topleft = (0-25 + 7*w_hliny,y_hliny) 
+hlina5.topleft = (ROZLISENI_X-320,y_hliny) 
 
 vykreslovani_hliny1 = True
 vykreslovani_hliny2 = True
@@ -758,47 +766,58 @@ while program_bezi:
                     nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
                     zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny3 = False
-
+        
         #kolize_strely_zizaly_s_hlinou
-        if pygame.Rect.colliderect(strela, hlina1) and vykreslovani_hliny1:
-            zizala_zije = False
-            hrajem = False
-            game_over_TF = False
-            zvuk_game_over.play()
+        if stisknuto[pygame.K_KP1]:
+            smrtici_strela = False
+            barva_fontu1 = (cervena)
+            cas_stisknuti = pygame.time.get_ticks()
             
-            
-        if pygame.Rect.colliderect(strela, hlina2) and vykreslovani_hliny2:
-            zizala_zije = False
-            hrajem = False
-            game_over_TF = False
-            zvuk_game_over.play()
-            
-            
-        if pygame.Rect.colliderect(strela, hlina3) and vykreslovani_hliny3:
-            zizala_zije = False
-            hrajem = False
-            game_over_TF = False
-            zvuk_game_over.play()
-            
-            
-        if pygame.Rect.colliderect(strela, hlina4) and vykreslovani_hliny4:
-            zizala_zije = False
-            hrajem = False
-            game_over_TF = False
-            zvuk_game_over.play()
-            
-            
-        if pygame.Rect.colliderect(strela, hlina5) and vykreslovani_hliny5:
-            zizala_zije = False
-            hrajem = False
-            game_over_TF = False
-            zvuk_game_over.play()
-            
+        cas_nyni = pygame.time.get_ticks()
+        
+        if cas_nyni - cas_stisknuti > 8000:
+            smrtici_strela = True
+        
+        if smrtici_strela:
+            if pygame.Rect.colliderect(strela, hlina1) and vykreslovani_hliny1:
+                zizala_zije = False
+                hrajem = False
+                game_over_TF = False
+                zvuk_game_over.play()
                 
-        if vsechny_domy == []:
-            game_over_TF = False
-            hrajem = False
-            zvuk_game_over.play()
+                
+            if pygame.Rect.colliderect(strela, hlina2) and vykreslovani_hliny2:
+                zizala_zije = False
+                hrajem = False
+                game_over_TF = False
+                zvuk_game_over.play()
+                
+                
+            if pygame.Rect.colliderect(strela, hlina3) and vykreslovani_hliny3:
+                zizala_zije = False
+                hrajem = False
+                game_over_TF = False
+                zvuk_game_over.play()
+                
+                
+            if pygame.Rect.colliderect(strela, hlina4) and vykreslovani_hliny4:
+                zizala_zije = False
+                hrajem = False
+                game_over_TF = False
+                zvuk_game_over.play()
+                
+                
+            if pygame.Rect.colliderect(strela, hlina5) and vykreslovani_hliny5:
+                zizala_zije = False
+                hrajem = False
+                game_over_TF = False
+                zvuk_game_over.play()
+                
+                    
+            if vsechny_domy == []:
+                game_over_TF = False
+                hrajem = False
+                zvuk_game_over.play()
         
         
         
@@ -869,7 +888,9 @@ while program_bezi:
     score_text = score_font.render(str(score),True,cerna)
     okno.blit(score_text, (ROZLISENI_X - 165, 30))
     okno.blit(text1, (ROZLISENI_X - 200 - 165, 30))
-        
+    #powerupy text
+    okno.blit(pu_font.render("1-shooting through houses",True,barva_fontu1),(10,5))
+    okno.blit(pu_font.render("2-monke freeze",True,barva_fontu2),(10,40))
         
     pygame.display.update()
-        
+   
