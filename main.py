@@ -57,6 +57,7 @@ zvuk_strelby = pygame.mixer.Sound("BFG1.wav")
 zvuk_nepratelske_strelby = pygame.mixer.Sound("banan.wav")
 zvuk_game_over = pygame.mixer.Sound("game_over.wav")
 zvuk_winner = pygame.mixer.Sound("win.wav")
+zvuk_startup = pygame.mixer.Sound("startup.wav")
 
 #rozměry pro nepřátele
 class nepritel(objekt):
@@ -131,7 +132,7 @@ hlina4 = hlina4_vykres.get_rect()
 hlina4.topleft = (5*w_hliny-80, y_hliny)
 
 hlina5 = hlina5_vykres.get_rect() 
-hlina5.topleft = (0-25 + 7*w_hliny,y_hliny) 
+hlina5.topleft = (0-80 + 7*w_hliny,y_hliny) 
 
 vykreslovani_hliny1 = True
 vykreslovani_hliny2 = True
@@ -260,6 +261,7 @@ random_vojak = True
 
 pygame.display.set_caption('Mongol House Defense')
 okno = pygame.display.set_mode(ROZLISENI_OKNA)
+zvuk_startup.play()
 
 while program_bezi:
     okno.fill(BARVA_POZADI)
@@ -495,7 +497,7 @@ while program_bezi:
                     zvuk_nepratelske_strelby.play()
                 vykreslovani_domu1 = False
         
-        if demolice_hliny0_hlina1:
+        if demolice_hliny0_hlina1 == True:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela):
                 hlina1_vykres = pygame.image.load("vetsi_hlina_znicena.gif")
                 demolice_hliny0_hlina1 = False
@@ -506,7 +508,7 @@ while program_bezi:
                 nepratelska_strela.y = random_vojak_v_rade.pozice[1] + 50
                 zvuk_nepratelske_strelby.play()
         
-        if demolice_hliny1_hlina1:
+        if demolice_hliny1_hlina1 == True:
             if pygame.Rect.colliderect(hlina1,nepratelska_strela):
                 if vykreslovani_hliny1:
                     random_rada = random.choice(vsechny_rady)
