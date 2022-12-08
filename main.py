@@ -292,7 +292,8 @@ while program_bezi:
     if stisknuto[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-    if hrajem == True:    
+    if hrajem == True:
+        cas_nyni = pygame.time.get_ticks()
         #ovladani_zizaly
         if stisknuto[pygame.K_RIGHT]:
             zizala_x += v_zizaly
@@ -817,29 +818,27 @@ while program_bezi:
                 zvuk_game_over.play()
                 
         #kolize_strely_zizaly_s_hlinou
-        casovac_fontu_text = (pu_font.render(str(5),True,cerna))
-        if stisknuto[pygame.K_KP1] and shooting_through_houses1 == True:
-            smrtici_strela = False
-            barva_fontu1 = (cervena)
-            cas_stisknuti = pygame.time.get_ticks()
-            casovac_fontu = True
-                
-                
-        cas_nyni = pygame.time.get_ticks()
-
-            
-        if cas_nyni - cas_stisknuti > 1000:    
-            casovac_fontu_text = (pu_font.render(str(4),True,cerna))
-        if cas_nyni - cas_stisknuti > 2000:
-            casovac_fontu_text = (pu_font.render(str(3),True,cerna))
-        if cas_nyni - cas_stisknuti > 3000:
-            casovac_fontu_text = (pu_font.render(str(2),True,cerna))
-        if cas_nyni - cas_stisknuti > 4000:
-            casovac_fontu_text = (pu_font.render(str(1),True,cervena))
-        if cas_nyni - cas_stisknuti > 5000:               
-            smrtici_strela = True
-            casovac_fontu = False
-            shooting_through_houses1 = False
+        
+        if shooting_through_houses1 == True:
+            if stisknuto[pygame.K_KP1]:
+                smrtici_strela = False
+                barva_fontu1 = (cervena)
+                cas_stisknuti = pygame.time.get_ticks()
+                casovac_fontu = True
+            if not smrtici_strela:
+                casovac_fontu_text = (pu_font.render(str(5),True,cerna))
+                if cas_nyni - cas_stisknuti > 1000:    
+                    casovac_fontu_text = (pu_font.render(str(4),True,cerna))
+                if cas_nyni - cas_stisknuti > 2000:
+                    casovac_fontu_text = (pu_font.render(str(3),True,cerna))
+                if cas_nyni - cas_stisknuti > 3000:
+                    casovac_fontu_text = (pu_font.render(str(2),True,cerna))
+                if cas_nyni - cas_stisknuti > 4000:
+                    casovac_fontu_text = (pu_font.render(str(1),True,cervena))
+                if cas_nyni - cas_stisknuti > 5000:               
+                    smrtici_strela = True
+                    casovac_fontu = False
+                    shooting_through_houses1 = False
         
         
         
