@@ -1,17 +1,21 @@
 import sys
 import pygame
 import random
+import time
 pygame.init()
+
 
 ROZLISENI_OKNA = ROZLISENI_X, ROZLISENI_Y = 1920, 1080
 cas = pygame.time.Clock()
+
 
 program_bezi = True
 game_over_TF = True
 hrajem = True
 winner = False
 smrtici_strela = True
-
+casovac_fontu = False
+shooting_through_houses1 = True
 #čas
 cas_nyni = 0
 cas_stisknuti = 0
@@ -104,7 +108,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 15
+v_strely = 7
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -140,11 +144,8 @@ hlina4 = hlina4_vykres.get_rect()
 hlina4.topleft = (5*w_hliny-80, y_hliny)
 
 hlina5 = hlina5_vykres.get_rect() 
-<<<<<<< HEAD
 hlina5.topleft = (ROZLISENI_X-320,y_hliny) 
-=======
 hlina5.topleft = (0-80 + 7*w_hliny,y_hliny) 
->>>>>>> main
 
 vykreslovani_hliny1 = True
 vykreslovani_hliny2 = True
@@ -176,7 +177,7 @@ demolice_hliny1_hlina1 = False
 
 dum2_w = sirka_domu
 dum2_h = vyska_domu
-dum2_x = hlina2.x + hlina2.w - sirka_domu - 100
+dum2_x = hlina2.x + hlina2.w - sirka_domu - 120
 dum2_y = 805 + 25
 house2 = house2_vykres.get_rect()
 house2.topleft = (dum1_x, dum1_y)
@@ -190,7 +191,7 @@ demolice_hliny1_hlina2 = False
 
 dum3_w = sirka_domu
 dum3_h = vyska_domu
-dum3_x = hlina4.x + 10
+dum3_x = hlina4.x + 20
 dum3_y = 805 + 25
 house3 = house3_vykres.get_rect()
 house3.topleft = (dum1_x, dum1_y)
@@ -448,7 +449,7 @@ while program_bezi:
             
         
         #pohyb_nepratelske_strely
-        nepratelska_strela.y += 3
+        nepratelska_strela.y += 2
         if random_vyber:
             if nepratelska_strela.y >= ROZLISENI_Y:
                 random_rada = random.choice(vsechny_rady)
@@ -773,16 +774,6 @@ while program_bezi:
                     zvuk_nepratelske_strelby.play()
                 vykreslovani_hliny3 = False
         
-        #kolize_strely_zizaly_s_hlinou
-        if stisknuto[pygame.K_KP1]:
-            smrtici_strela = False
-            barva_fontu1 = (cervena)
-            cas_stisknuti = pygame.time.get_ticks()
-            
-        cas_nyni = pygame.time.get_ticks()
-        
-        if cas_nyni - cas_stisknuti > 8000:
-            smrtici_strela = True
         
         if smrtici_strela:
             if pygame.Rect.colliderect(strela, hlina1) and vykreslovani_hliny1:
@@ -824,6 +815,31 @@ while program_bezi:
                 game_over_TF = False
                 hrajem = False
                 zvuk_game_over.play()
+                
+        #kolize_strely_zizaly_s_hlinou
+        casovac_fontu_text = (pu_font.render(str(5),True,cerna))
+        if stisknuto[pygame.K_KP1] and shooting_through_houses1 == True:
+            smrtici_strela = False
+            barva_fontu1 = (cervena)
+            cas_stisknuti = pygame.time.get_ticks()
+            casovac_fontu = True
+                
+                
+        cas_nyni = pygame.time.get_ticks()
+
+            
+        if cas_nyni - cas_stisknuti > 1000:    
+            casovac_fontu_text = (pu_font.render(str(4),True,cerna))
+        if cas_nyni - cas_stisknuti > 2000:
+            casovac_fontu_text = (pu_font.render(str(3),True,cerna))
+        if cas_nyni - cas_stisknuti > 3000:
+            casovac_fontu_text = (pu_font.render(str(2),True,cerna))
+        if cas_nyni - cas_stisknuti > 4000:
+            casovac_fontu_text = (pu_font.render(str(1),True,cervena))
+        if cas_nyni - cas_stisknuti > 5000:               
+            smrtici_strela = True
+            casovac_fontu = False
+            shooting_through_houses1 = False
         
         
         
@@ -896,7 +912,10 @@ while program_bezi:
     okno.blit(text1, (ROZLISENI_X - 200 - 165, 30))
     #powerupy text
     okno.blit(pu_font.render("1-shooting through houses",True,barva_fontu1),(10,5))
-    okno.blit(pu_font.render("2-monke freeze",True,barva_fontu2),(10,40))
+    okno.blit(pu_font.render("2-monke freeze",True,barva_fontu2),(10,40)) 
+    if casovac_fontu:
+        okno.blit(casovac_fontu_text, (zizala_x - 20,zizala_y))
+        
         
     pygame.display.update()
-   
+    
