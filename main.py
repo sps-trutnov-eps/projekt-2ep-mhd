@@ -16,6 +16,10 @@ winner = False
 smrtici_strela = True
 casovac_fontu = False
 shooting_through_houses1 = True
+monke_freeze = True
+freeze = True
+strela_through = False
+
 #čas
 cas_nyni = 0
 cas_stisknuti = 0
@@ -49,6 +53,7 @@ text1 = font1.render("score:", True, cerna)
 #obrazky
 zizala_load = pygame.image.load("zizala.gif")
 monkey = pygame.image.load("monke.gif")
+monkey_freeze = pygame.image.load("monke_freeze.gif")
 house1_vykres = pygame.image.load("mongol_house.gif")
 house2_vykres = pygame.image.load("mongol_house.gif")
 house3_vykres = pygame.image.load("mongol_house.gif")
@@ -61,7 +66,9 @@ hlina5_vykres = pygame.image.load("vetsi_hlina.gif")
 spodni_hlina = pygame.image.load("spodni_hlina.gif")
 pozadi = pygame.image.load("pozadi.gif")
 strela_load = pygame.image.load("strela.gif")
+strela_powerup = pygame.image.load("strela_through.gif")
 banan = pygame.image.load("banan.gif")
+banan_freeze = pygame.image.load("banan_freeze.gif")
 objekt = pygame.Rect
 
 #zvuky
@@ -79,6 +86,7 @@ class nepritel(objekt):
         self.y = y
         self.pozice = [self.x,self.y]
         self.image = monkey
+        self.freeze = monkey_freeze
         self.rect = pygame.Rect(self.pozice,self.rozmer)
         self.v = 0.5
         self.zije = True
@@ -108,7 +116,7 @@ zizala_zije = True
 #strela
 velikost_strely = 10
 barva_strely = (zelena)
-v_strely = 7
+v_strely = 6
 
 strela_x = zizala_x + zizala_w - 8
 strela_y = zizala_y
@@ -328,7 +336,7 @@ while program_bezi:
         if stisknuto[pygame.K_SPACE]:
             strelba = True
             
-        if strela.y == 985:
+        if strela.y == 999:
             zvuk_strelby.play()
         
         #pohyb_nepratel
@@ -776,6 +784,7 @@ while program_bezi:
                 vykreslovani_hliny3 = False
         
         
+        #kolize_strely_zizaly_s_hlinou
         if smrtici_strela:
             if pygame.Rect.colliderect(strela, hlina1) and vykreslovani_hliny1:
                 zizala_zije = False
@@ -817,14 +826,15 @@ while program_bezi:
                 hrajem = False
                 zvuk_game_over.play()
                 
-        #kolize_strely_zizaly_s_hlinou
         
+        #shooting_through_houses
         if shooting_through_houses1 == True:
             if stisknuto[pygame.K_KP1]:
                 smrtici_strela = False
                 barva_fontu1 = (cervena)
                 cas_stisknuti = pygame.time.get_ticks()
                 casovac_fontu = True
+                strela_through = True
             if not smrtici_strela:
                 casovac_fontu_text = (pu_font.render(str(5),True,cerna))
                 if cas_nyni - cas_stisknuti > 1000:    
@@ -839,42 +849,101 @@ while program_bezi:
                     smrtici_strela = True
                     casovac_fontu = False
                     shooting_through_houses1 = False
-        
-        
+                    strela_through = False
+                  
+        #monke_freeze
+        if monke_freeze == True:
+            if stisknuto[pygame.K_KP2]:
+                barva_fontu2 = (cervena)
+                cas_stisknuti2 = pygame.time.get_ticks()
+                freeze = False
+            if not freeze:
+                for i in rada1:
+                    i.v = 0
+                for i in rada2:
+                    i.v = 0
+                for i in rada3:
+                    i.v = 0
+                for i in rada4:
+                    i.v = 0
+                for i in rada5:
+                    i.v = 0
+                nepratelska_strela.y -= 2
+                if cas_nyni - cas_stisknuti2 < 5000:
+                    for i in rada1:
+                        i.v = 0
+                    for i in rada2:
+                        i.v = 0
+                    for i in rada3:
+                        i.v = 0
+                    for i in rada4:
+                        i.v = 0
+                    for i in rada5:
+                        i.v = 0
+                    nepratelska_strela.y -= 0
+                if cas_nyni - cas_stisknuti2 > 5000:
+                    for i in rada1:
+                        i.v = 0.5
+                    for i in rada2:
+                        i.v = 0.5
+                    for i in rada3:
+                        i.v = 0.5
+                    for i in rada4:
+                        i.v = 0.5
+                    for i in rada5:
+                        i.v = 0.5
+                    nepratelska_strela.y += 2
+                    monke_freeze = False
+                    freeze = True
+            
         
     #1. rada nepratel
     for i in rada1:
         if i.zije == True:
             okno.blit(i.image, i.pozice)
+        if freeze == False:
+            okno.blit(i.freeze, i.pozice)
                 
     #2. rada nepratel
     for i in rada2:
         if i.zije == True:
             okno.blit(i.image, i.pozice)
+        if freeze == False:
+            okno.blit(i.freeze, i.pozice)
 
     #3. rada nepratel
     for i in rada3:
         if i.zije == True:
             okno.blit(i.image, i.pozice)
+        if freeze == False:
+            okno.blit(i.freeze, i.pozice)
 
     #4. rada nepratel
     for i in rada4:
         if i.zije == True:
             okno.blit(i.image, i.pozice)
+        if freeze == False:
+            okno.blit(i.freeze, i.pozice)
 
     #5. rada nepratel
     for i in rada5:
         if i.zije == True:
             okno.blit(i.image, i.pozice)
+        if freeze == False:
+            okno.blit(i.freeze, i.pozice)
+
+    #strela_powerup
+    if strela_through == True:
+        okno.blit(strela_powerup, strela)
 
     #zizala
     if zizala_zije == True:
         okno.blit(zizala_load, zizala)
-            
+
     #strela
-    if strelba == True:
-        okno.blit(strela_load, strela) 
-            
+    if strelba == True and strela_through == False:
+        okno.blit(strela_load, strela)
+
     #spodni_hlina
     okno.blit(spodni_hlina, spodni_hlina_rect)
     #domy
@@ -896,9 +965,11 @@ while program_bezi:
     if vykreslovani_hliny4:
         okno.blit(hlina4_vykres, hlina4)
     if vykreslovani_hliny5:
-        okno.blit(hlina5_vykres, hlina5) 
+        okno.blit(hlina5_vykres, hlina5)
     #nepratelska_strela
     okno.blit(banan, nepratelska_strela)
+    if freeze == False:
+        okno.blit(banan_freeze, nepratelska_strela)
     #Game over
     if game_over_TF == False:
         okno.blit(game_over, (ROZLISENI_X/2 - 576/2, ROZLISENI_Y/2 - 470/2))
